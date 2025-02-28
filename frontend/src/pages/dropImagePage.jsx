@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./dropImagePage.css"
+import "../assets/loupe.png"
 
 const DropImagePage = () => {
     useEffect(() => {
@@ -15,6 +16,10 @@ const DropImagePage = () => {
         };
     }, []);
 
+    function dropHandler(){
+
+    }
+
     return(
         <>
         <div className="page-drop-image-wrap">
@@ -23,16 +28,16 @@ const DropImagePage = () => {
             </h1>
 
             <div className="containeur-global-drop-image">
-                <form action="">
-                    <label htmlFor="plant-name-input"><i class="fa-solid fa-magnifying-glass"></i></label>
-                    <input type="text" name="" id="plant-name-input" />
+                <form className="container-form" action="">
+                    <label htmlFor="plant-name-input"><img src="../assets/loupe.png" alt="" /></label>
+                    <input type="text" name="" id="plant-name-input" placeholder="Enter plant name"/>
                 </form>
 
-                <div>
-                    Line du millieu
+                <div className="ligne-millieu">
+                    <span>OU</span>
                 </div>
 
-                <div>
+                <div className="glisser-area" onDrop={dropHandler}>
                     Faire glisser une image
                 </div>
             </div>
