@@ -28,7 +28,7 @@ const CircularProgress = () => {
         cercleProgres.style.stroke = "#60e6a8";
     }
     if(circleVal){
-        circleVal.innerHTML = value;
+        circleVal.innerHTML = value + "°C";
     }
   },[value])
 

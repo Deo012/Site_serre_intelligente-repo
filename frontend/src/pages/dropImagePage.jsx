@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./dropImagePage.css"
-import "../assets/loupe.png"
+import loupeImg from "../assets/loupe.png"
 
 const DropImagePage = () => {
-    useEffect(() => {
-        const script = document.createElement("script");
 
-        script.src = "https://kit.fontawesome.com/f2385fabca.js";
-        script.crossOrigin = "anonymous";
-        script.async = true;
+    const [files, setFiles] = useState([]);
 
-        document.body.appendChild(script);
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
+    const handleDrop = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-    function dropHandler(){
+        const droppedFiles = Array.from(event.dataTransfer.files);
+        setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
+    };
 
-    }
+    const handleDragOver = (event) => {
+        event.preventDefault(); // Needed to allow dropping
+    };
 
     return(
         <>
@@ -29,7 +27,7 @@ const DropImagePage = () => {
 
             <div className="containeur-global-drop-image">
                 <form className="container-form" action="">
-                    <label htmlFor="plant-name-input"><img src="../assets/loupe.png" alt="" /></label>
+                    <label htmlFor="plant-name-input"><img src={loupeImg} alt="" width="30px"/></label>
                     <input type="text" name="" id="plant-name-input" placeholder="Enter plant name"/>
                 </form>
 
@@ -37,9 +35,21 @@ const DropImagePage = () => {
                     <span>OU</span>
                 </div>
 
-                <div className="glisser-area" onDrop={dropHandler}>
+                <div id="glisser-area" onDrop={handleDrop} onDragOver={handleDragOver}>
                     Faire glisser une image
                 </div>
+
+                {files.length > 0 && (
+                    <div className="file-list">
+                        <h3>Selected Files:</h3>
+                        <ul>
+                            {files.map((file, index) => (
+                                <li key={index}>{file.name}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
             </div>
 
         </div>
