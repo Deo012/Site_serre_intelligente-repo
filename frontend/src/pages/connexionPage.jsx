@@ -43,7 +43,7 @@ const ConnexionPage = () => {
             <div className="connexion-page-main">
                 <div className="container-cp">
                     <h1>Connexion</h1>
-                    <Link to="/" className="close-signe"></Link>
+                    <a href="/" className="close-signe"></a>
                     <form action="" method="POST">
                         <div className="input-box">
                             <input 
