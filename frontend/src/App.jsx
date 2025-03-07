@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashBoard from './pages/dashBoard';
 import ConnexionPage from './pages/connexionPAge';
 import DropImagePage from './pages/dropImagePage';
+import AcceuilPage from './pages/acceuilPage';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
     
     <BrowserRouter>
       <Routes>
-        <Route exact path='/' element={<DashBoard/>} />
+        <Route exact path='/' element={<AcceuilPage/>} />
+        <Route path='/dashBoard' element={<DashBoard/>} />
         <Route path='/connexionPage' element={<ConnexionPage/>} />
         <Route path='/dropImagePage' element={<DropImagePage/>}/>
       </Routes>

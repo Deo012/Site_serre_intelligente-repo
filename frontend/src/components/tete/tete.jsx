@@ -1,34 +1,27 @@
 import React from "react";
 import "./tete.css"
+import {Link} from "react-router-dom"
 
-const Tail = () => {
+const Tete = () => {
     return (
         <>
-        <div className="bas-page">
             <div>
-                <p>Serre Intelligente</p>
+            <div className="tete-container">
+                <p className="tete-titre">Serre Intelligente</p>
+
+                <nav>
+                    <ul className="tete-center-ul">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/dashBoard">DashBoard</a></li>
+                        <li><a href="/dropImagePage">AI</a></li>
+                    </ul>
+                </nav>
+
+                <div><a href="/connexionPage">Connexion</a></div>
             </div>
-
-            <div className="liens">
-                <Link to="/connexionPage">Page de connexion</Link>
-                <Link>Page Principal</Link>
-                <Link>Ai help</Link>
             </div>
-
-            <div>
-                <div>
-                    ImgP
-                </div>
-
-                <div>
-                    Nom et Prenom
-                </div>
-            </div>
-
-        </div>
-        
         </>
     );
 }
 
-export default Tail;
+export default Tete;
