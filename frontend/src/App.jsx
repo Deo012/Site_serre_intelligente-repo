@@ -1,7 +1,7 @@
 /*
 npm create vite@latest
 npm i react-router-dom
-
+npm install --save @iconscout/react-unicons
 */
 
 import { useState } from 'react'

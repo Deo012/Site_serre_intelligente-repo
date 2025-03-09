@@ -1,5 +1,10 @@
-.page{
-    height: 100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --glass: rgba(255,255,255,0.54);
 }
 .lumiere-info{
     background-color: white;
@@ -77,4 +82,26 @@
 .haut-page{
     display: flex;
     flex-direction: column;
+}
+.container-page{
+    background-image: linear-gradient(
+        106deg,
+        #CDE8E5 29.63%,
+        #EEF7FF 51.55%,
+        #6295A2 90.85%
+    );
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    font-family: "Inter", sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+.page{
+    display: grid;
+    height: 97%;
+    width: 97%;
+    border-radius: 2em;
+    background-color: var(--glass);
+    grid-template-columns: 11rem auto 20rem;
 }

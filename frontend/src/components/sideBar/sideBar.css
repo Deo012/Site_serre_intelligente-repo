@@ -1,0 +1,35 @@
+.sideBar{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 4rem;
+    transition: all 300ms ease;
+}
+.logo{
+    display: flex;
+    height: 5rem;
+    font-weight: bold;
+    font-size: 22px;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    height: 4%;
+}
+.logo>img{
+    width: 3rem;
+    height: 3rem;
+}
+.logo>span>span{
+    color: #205781;
+}
+/* Menu */
+.menu{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+.menuItem{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
