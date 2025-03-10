@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sideBar.css"
 import Logo from "../../assets/react.svg"
+import { Link, useLocation } from "react-router-dom";
 
 
 const SideBar = () => {
+    const location = useLocation();
     return(
         <>
             <div className="sideBar">
@@ -16,12 +18,33 @@ const SideBar = () => {
                 </div>
                 {/* menu */}
                 <div className="menu">
-                    <div className="menuItem">
+                    <Link 
+                        className={location.pathname === "/dashBoard" ? "menuItem active" : "menuItem"}
+                        to="/dashBoard"
+                    >
                         <div>
-                            Icon
+                            🏚️
                         </div>
                         <div>Dashboard</div>
-                    </div>
+                    </Link>
+                    <Link 
+                        className={location.pathname === "/dropImagePage" ? "menuItem active" : "menuItem"}
+                        to="/dropImagePage"
+                    >
+                        <div>
+                            📁
+                        </div>
+                        <div>Drop page</div>
+                    </Link>
+                    <Link 
+                        className={location.pathname === "/" ? "menuItem active" : "menuItem"}
+                        to="/"
+                    >
+                        <div>
+                            🔙
+                        </div>
+                        <div>Retour</div>
+                    </Link>
                 </div>
             </div>
         </>
