@@ -1,0 +1,7 @@
+.control-cards{
+    display: flex;
+    gap: 4rem;
+}
+.parent-container{
+    width: 100%;
+}

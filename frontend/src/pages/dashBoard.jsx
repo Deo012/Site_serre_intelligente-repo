@@ -6,7 +6,7 @@ import Toggle from "../components/toggle/toggle.jsx";
 import Cloud from "../components/cloud/cloud.jsx";
 import { Link } from "react-router-dom";
 import SideBar from "../components/sideBar/sideBar.jsx";
-
+import ControlCards from "../components/controlCards/controlCards.jsx";
 
 
 const DashBoard = ()=>{
@@ -50,11 +50,6 @@ const DashBoard = ()=>{
                         <section className="serre-infos">
 
                             <div className="info-container">
-                                <p className="info-titre">Humidité</p>
-                                <p className="info">48,2%</p>
-                            </div>
-
-                            <div className="info-container">
                                 <p className="info-titre">Temperature</p>
                                 <p className="info">68°C</p>
                             </div>
@@ -71,53 +66,7 @@ const DashBoard = ()=>{
 
                         </section>
 
-                        <section className="espace-de-control">
-                            
-                            <div className="control-container">
-                                <div className="switch-section">
-                                    <Cloud/>
-                                    <Toggle/>
-                                </div>
-                                <div className="controler-info">
-                                    <p className="controler-mark">Gaabor</p>
-                                    <p className="controler-">Humidifier</p>
-                                </div>
-                            </div>
-
-                            <div className="control-container">
-                                <div className="switch-section">
-                                    <p>X</p>
-                                    <Toggle/>
-                                </div>
-                                <div className="controler-info">
-                                    <p className="controler-mark">Amazon echo</p>
-                                    <p className="controler-">Smart Lamp</p>
-                                </div>
-                            </div>
-
-                            <div className="control-container">
-                                <div className="switch-section">
-                                    <p>X</p>
-                                    <Toggle/>
-                                </div>
-                                <div className="controler-info">
-                                    <p className="controler-mark">Bando</p>
-                                    <p className="controler-">Ventilateurs</p>
-                                </div>
-                            </div>
-
-                            <div className="control-container">
-                                <div className="switch-section">
-                                    <p>X</p>
-                                    <Toggle/>
-                                </div>
-                                <div className="controler-info">
-                                    <p className="controler-mark">Bando</p>
-                                    <p className="controler-">Ventilateurs</p>
-                                </div>
-                            </div>
-
-                        </section>
+                        <ControlCards/>
 
                     </section>
 

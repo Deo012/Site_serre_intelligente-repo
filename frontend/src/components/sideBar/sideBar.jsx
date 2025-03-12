@@ -41,6 +41,15 @@ const SideBar = () => {
                         to="/"
                     >
                         <div>
+                            ❌
+                        </div>
+                        <div>Deconnxion</div>
+                    </Link>
+                    <Link 
+                        className={location.pathname === "/" ? "menuItem active" : "menuItem"}
+                        to="/"
+                    >
+                        <div>
                             🔙
                         </div>
                         <div>Retour</div>

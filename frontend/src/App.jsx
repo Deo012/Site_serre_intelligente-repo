@@ -2,6 +2,7 @@
 npm create vite@latest
 npm i react-router-dom
 npm install --save @iconscout/react-unicons
+npm i framer-motion
 */
 
 import { useState } from 'react'
