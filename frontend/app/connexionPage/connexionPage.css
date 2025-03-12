@@ -1,0 +1,97 @@
+.connexion-page-main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/assets/kurp2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.container-cp{
+    border: 2px solid rgb(255, 255, 255);
+    width: 20rem;
+    border-radius: 1em;
+    padding: 1.5em 1.5em;
+    position: relative;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 0.3em rgba(0,0,0,.2);
+}
+.container-cp h1{
+    font-size: 3em;
+    text-align: center;
+    color: #F6F8D5;
+}
+.container-cp .input-box{
+    position: relative;
+    width: 100%;
+    height: 3em;
+    margin: 2em 0;
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 0.1em solid rgba(0, 0, 0, 0.2);
+    border-radius: 3em;
+    font-size: 1em;
+    color: #000000;
+    padding: 0em 1em 0em 1em;
+}
+.input-box input::placeholder{
+    color: #000000;
+}
+.input-box i {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1em;
+}
+
+.container-cp .btn{
+    width: 100%;
+    height: 3em;
+    background: #F6F8D5;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 0.3em rgba(0,0,0,.2);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.register-link{
+    font-size: 1em;
+    text-align: center;
+    margin: 1em 0 1em;
+}
+.register-link p a{
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+}
+.register-link p a:hover{
+    text-decoration: underline;
+}
+.close-signe{
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+
+    --b: 5px; /* thickness */
+    --s: 50px; /* space around */            
+    --c: #F6F8D5;
+
+    height: 30px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--c);
+    box-sizing: border-box;
+    --g:conic-gradient(var(--c) 0 0) no-repeat 50%/;
+    background: 
+    var(--g) var(--b) calc(450% - 2*var(--s)),
+    var(--g) calc(450% - 2*var(--s)) var(--b); /*Les pourcentages modifie les deux ligne du x*/
+    rotate: 45deg;
+}

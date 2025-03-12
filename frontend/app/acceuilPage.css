@@ -1,0 +1,63 @@
+*{
+    box-sizing: border-box;
+}
+.acceuil-container{
+    height: 100vh;
+    width: 100vw;
+    background-image: url("/assets/kurp2.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.acceuil-content h1{
+    font-size: 60px;
+    font-weight: 100px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #205781;
+}
+.acceuil-content p{
+    font-size: 20px;
+    color: #4F959D;
+}
+.acceuil-content{
+    margin-top: 10%;
+    margin-left: 10%;
+}
+.accueil-btn {
+    background-image: linear-gradient(to right, #003973, #4F959D, #003973);
+    background-size: 200% 100%; /* Make the gradient twice as wide */
+    background-position: left;
+    padding: 10px 20px;
+    text-align: center;
+    transition: background-position 0.5s ease-in-out;
+    color: white;            
+    box-shadow: 0 0 20px #4F959D;
+    border-radius: 6px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.accueil-btn:hover {
+    background-position: right; /* Moves the gradient */
+    color: #fff;
+    text-decoration: none;
+}
+.acceuil-container img{
+    position: absolute;
+    height: 80%;
+    top: 40px;
+    right: 0;
+}
+.social-link{
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -80px;
+    bottom: 180px;
+}
+.social-link a{
+    text-decoration: none;
+    color: #4F959D;
+    padding-right: 20px;
+    font-size: 14px;
+}

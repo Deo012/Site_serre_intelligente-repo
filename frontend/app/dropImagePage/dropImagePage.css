@@ -1,0 +1,62 @@
+.dropImagePage{
+    display: grid;
+    height: 97%;
+    width: 97%;
+    border-radius: 2em;
+    background-color: rgba(255,255,255,0.54);
+    grid-template-columns: 11rem auto;
+}
+.drop-wrap{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main-titre{
+    font-size: 5em;
+}
+.containeur-global-drop-image{
+    width: 70%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #D9D9D9;
+}
+.container-form{
+    background-color: #999999;
+    width: 85%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1em;
+}
+#plant-name-input{
+    width: 80%;
+    background-color: #999999;
+    border: none;
+}
+.container-form label{
+    background-image: url("/assets/loupe.png");
+    
+}
+#glisser-area{
+    height: 50%;
+    width: 80%;
+    border: 2px dashed black;
+    text-align: center;
+}
+.ligne-millieu{
+    width: 70%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+.ligne-millieu span{
+    background:#D9D9D9; 
+    padding:0 10px; 
+}

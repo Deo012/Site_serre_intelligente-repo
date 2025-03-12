@@ -1,0 +1,25 @@
+.card{
+    height: fit-content;
+}
+.compact-card{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 10rem;
+    border-radius: 0.7rem;
+    position: relative;
+    cursor: pointer;
+    padding: 1rem;
+    justify-content: space-between;
+}
+.compact-card:hover{
+    box-shadow: none;
+}
+.container-switch{
+    display: flex;
+    justify-content: end;
+}
+.container-info{
+    display: flex;
+    flex-direction: column;
+}

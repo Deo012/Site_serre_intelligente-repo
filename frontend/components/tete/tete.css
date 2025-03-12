@@ -1,0 +1,32 @@
+.tete-container{
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    font-family: helvetica, sans-serif;
+    padding: 10px 60px;
+    color: #27391C;
+}
+.tete-center-ul{
+    display: flex;
+    align-items: center;
+}
+.tete-center-ul li{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 10%;
+}
+.tete-container a{
+    text-decoration: none;
+}
+.tete-container a:hover{
+    
+}
+.tete-container a:visited, .tete-container a:link{
+    color: black;
+}
+.tete-titre{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: 12px;
+    color: #27391C;
+}
