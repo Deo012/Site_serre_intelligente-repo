@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import SideBar from "../../components/sideBar/sideBar.jsx";
 import ControlCards from "../../components/controlCards/controlCards.jsx";
 import Image from "next/image";
+import SerreInfo from "@/components/serreInfo/serreInfo";
 
 
 const DashBoard = ()=>{
@@ -50,24 +51,7 @@ const DashBoard = ()=>{
 
                         </section>
 
-                        <section className="serre-infos">
-
-                            <div className="info-container">
-                                <p className="info-titre">Temperature</p>
-                                <p className="info">68°C</p>
-                            </div>
-
-                            <div className="info-container">
-                                <p className="info-titre">CO2</p>
-                                <p className="info">20%</p>
-                            </div>
-
-                            <div className="info-container">
-                                <p className="info-titre">Humidité sol</p>
-                                <p className="info">70%</p>
-                            </div>
-
-                        </section>
+                        <SerreInfo/>
 
                         <ControlCards/>
 

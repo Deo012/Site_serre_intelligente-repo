@@ -2,29 +2,31 @@
 
 import React, { useEffect, useState } from "react";
 import "./connexionPage.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 
 const ConnexionPage = () => {
-
-    let [name, setName] = useState("");
-    let [password, setPassword] = useState("");
-    let [age, setAge] = useState(0);
-    let [id, setID] = useState(0);
-    
+    const router = useRouter()
 
     //Rechercher l'utilisateur et vérifier les infos quand le form html est soummis
-    const handelSubmit = async(e: React.MouseEvent<HTMLButtonElement>) => {
+    async function handelSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault(); //empeche le bouton de soummettre le formulaire
         
-        
-        const userData ={
-            name,
-            password
+        const formData = new FormData(e.currentTarget);
+        const username = formData.get("username");
+        const password = formData.get("password");
+
+        const reponse = await fetch("/api/auth/login",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({username, password}),
+        });
+
+        if(reponse.ok){
+            router.push("/dashBoard");
         }
-
-        //loginAction(userData);
-
     }
 
     //Pour ajouter le script pour les icone fontawesome
@@ -45,29 +47,26 @@ const ConnexionPage = () => {
             <div className="connexion-page-main">
                 <div className="container-cp">
                     <h1>Connexion</h1>
-                    <a href="/" className="close-signe"></a>
-                    <form action="" method="POST">
+                    <Link href="/" className="close-signe"></Link>
+
+                    <form onSubmit={handelSubmit}>
                         <div className="input-box">
                             <input 
                                 type="text" 
-                                id="username" 
+                                name="username" 
                                 placeholder="Nom utilisateur"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
                             />
                             <i className="fa-solid fa-user"></i>
                         </div>
                         <div className="input-box">
                             <input 
                                 type="text" 
-                                id="password" 
+                                name="password" 
                                 placeholder="Mots de passe"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <i className="fa-solid fa-lock"></i>
                         </div>
-                        <button className="btn" type="submit" onClick={handelSubmit}>Conneter</button>
+                        <button className="btn" type="submit">Conneter</button>
                         <div className="register-link">
                             <p>Pas de compte? <a href="#">Enregistrer</a></p>
                         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./tete.css"
-import {Link} from "react-router-dom"
+import Link from "next/link";
 
 const Tete = () => {
     return (
@@ -11,9 +11,9 @@ const Tete = () => {
 
                 <nav>
                     <ul className="tete-center-ul">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/dashBoard">DashBoard</a></li>
-                        <li><a href="/dropImagePage">AI</a></li>
+                        <li><Link href="/">Home</Link></li>
+                        <li><Link href="/dashBoard">DashBoard</Link></li>
+                        <li><Link href="/dropImagePage">AI</Link></li>
                     </ul>
                 </nav>
 

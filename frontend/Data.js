@@ -22,7 +22,7 @@ let dataHumidite = {
 
 let dataCarbone = {
     title: "CO2",
-    value: "20%",
+    value: "30%",
     companyName: "Bando",
     switch_state: true,
     toggleSwitchState: function () {
