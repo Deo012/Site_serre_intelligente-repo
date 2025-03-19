@@ -11,6 +11,7 @@ import SideBar from "../../components/sideBar/sideBar.jsx";
 import ControlCards from "../../components/controlCards/controlCards.jsx";
 import Image from "next/image";
 import SerreInfo from "@/components/serreInfo/serreInfo";
+import { DataProvider } from "@/context/dataContext";
 
 
 const DashBoard = ()=>{

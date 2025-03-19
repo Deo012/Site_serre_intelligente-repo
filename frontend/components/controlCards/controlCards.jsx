@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import "./controlCards.css"
 import Card from "../card/card";
 import { CardsData } from "../../Data";
+import { useData } from "@/context/dataContext";
 
 const ControlCards = () => {
-    let [cardsData, setCardsData] = useState(CardsData);
-
-    // Function to update switch_state for a specific card
-    const handleToggle = (index) => {
-        const newCards = [...cardsData]; // Create a copy of the array
-        newCards[index].toggleSwitchState(); // Call the function
-        setCardsData(newCards); // Update state to trigger re-render
-    };
+    const {cardsData, toggleSwitchState} = useData();
 
     return (
         <>
@@ -25,7 +19,7 @@ const ControlCards = () => {
                             buttonState= {card.buttonState}
                             companyName = {card.companyName}
                             switch_state = {card.switch_state}
-                            onToggle={() => handleToggle(id)}
+                            onToggle={() => toggleSwitchState(id)} //   active la fonction du contexte
                             />
                         </div>
                     );

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./slideBar.css"
-
+import { useData } from "@/context/dataContext";
 
 const SlideBar = ()=>{
-    let [value, setValue] = useState(0)
+    const { cardsData } = useData()
+    let temp = parseInt(cardsData[1].value.replace("­­°C", ""));
+    console.log(temp)
+    let [value, setValue] = useState(temp)
+
     //note: useEffect est appeler apres que le html soit généré
     useEffect(() => {
         const slider = document.getElementById("my-range");
@@ -36,7 +40,7 @@ const SlideBar = ()=>{
     return(
         <>
             <div className="slider-container">
-                <input type="range" min="0" max="100" defaultValue="1" id="my-range" className="slider"/>
+                <input type="range" min="0" max="100" defaultValue={value} id="my-range" className="slider"/>
                 <output className="bubble"></output>
             </div>
         </>
