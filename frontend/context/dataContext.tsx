@@ -32,12 +32,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
 
     //  Requete vers serveur Flask pour recevoir le data
     const fetchData = () => {
-        axios.get("http://localhost:5000/retreiveData")
+        axios.get("http://10.0.0.236:5000/temperature")
             .then((response) => {
                 setCardsData([
-                    { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Amazon", switch_state: true },
-                    { title: "Humidité", value: `${response.data.hum}%`, companyName: "Gaabor", switch_state: true },
-                    { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Bando", switch_state: true },
+                    { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Amazon", switch_state: true },
+                    { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Gaabor", switch_state: true },
+                    // { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Bando", switch_state: true },
+                    { title: "CO2", value: `${30} ppm`, companyName: "Bando", switch_state: true },
                 ]);
             })
             .catch((error) => console.error("Error fetching data:", error));
@@ -46,7 +47,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     // Fetch data initially and then every 5 seconds
     useEffect(() => {
         fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 5000); // Fetch every 5sec
+        const interval = setInterval(fetchData, 5000); // Fetch every 30 seconds
 
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);

@@ -10,11 +10,13 @@ const SerreInfo = () => {
             <div className="serre-infos">
                 {cardsData.map((card, id)=>{
                     return (
+                        
                             <ResumeCard
-                            key={id}
+                            key= {id}
                             title= {card.title}
                             value= {card.value}
                             />
+                        
                     )
                 })}
             </div>
