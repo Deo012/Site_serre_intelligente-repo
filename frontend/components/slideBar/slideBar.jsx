@@ -5,7 +5,6 @@ import { useData } from "@/context/dataContext";
 const SlideBar = ()=>{
     const { cardsData } = useData()
     let temp = parseInt(cardsData[1].value.replace("­­°C", ""));
-    console.log(temp)
     let [value, setValue] = useState(temp)
 
     //note: useEffect est appeler apres que le html soit généré

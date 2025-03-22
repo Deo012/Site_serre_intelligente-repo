@@ -16,7 +16,7 @@ donne = {
 def regenerate_values():
     """Updates dictionary values every 30 seconds."""
     while True:
-        time.sleep(30)
+        time.sleep(2)
         for key in donne.keys():
             donne[key] = randint(10, 50)
         print(f"Updated values: {donne}")
@@ -31,9 +31,15 @@ def send_data():
 
 
 if __name__ == "__main__":
-    # Start the background data generation
-    threading.Thread(target=regenerate_values, daemon=True).start()
+    try:
+        # Start the background data generation
+        thread = threading.Thread(target=regenerate_values, daemon=True)
+        thread.start()
 
-    # Run the Flask app
-    app.run(host='0.0.0.0', port=5000, debug=True)
+        # Run the Flask app
+        app.run(host='0.0.0.0', port=5000, debug=False)
+    except KeyboardInterrupt:
+        thread.join()
+
+
 

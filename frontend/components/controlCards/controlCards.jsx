@@ -12,7 +12,7 @@ const ControlCards = () => {
             <div className="control-cards">
                 {cardsData.map((card, id) => {
                     return(
-                        <div className="parent-container">
+                        <div className="parent-container" key={id}>
                             <Card
                             title= {card.title}
                             value= {card.value}

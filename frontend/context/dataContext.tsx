@@ -43,10 +43,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
             .catch((error) => console.error("Error fetching data:", error));
     };
 
-    // Fetch data initially and then every 30 seconds
+    // Fetch data initially and then every 5 seconds
     useEffect(() => {
         fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 30000); // Fetch every 30 seconds
+        const interval = setInterval(fetchData, 5000); // Fetch every 5sec
 
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
