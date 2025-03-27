@@ -34,6 +34,7 @@ function CompactCard({param}){
                 <Toggle
                 checked = {param.switch_state}
                 onChange = {param.onToggle} //call the parent function to update switch_state
+                cardTitle = {param.title}
                 />
             </div>
             <div className="container-info">

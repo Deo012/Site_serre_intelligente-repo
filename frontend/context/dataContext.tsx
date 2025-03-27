@@ -16,7 +16,7 @@ interface CardData{
 const initialData: CardData[] = [
     { title: "Temperature", value: "28°C", companyName: "Amazon", switch_state: true },
     { title: "Humidité", value: "48,2%", companyName: "Gaabor", switch_state: true },
-    { title: "CO2", value: "30%", companyName: "Bando", switch_state: true },
+    { title: "Ventillateur", value: "30%", companyName: "Kingwin", switch_state: false },
 ];
 
 //  Create Contexte

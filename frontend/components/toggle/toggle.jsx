@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./toggle.css";
+import axios from "axios";
 
 const Toggle = (props) => {
 
@@ -9,7 +10,12 @@ const Toggle = (props) => {
         const newState = !state;
         setState(newState);
         props.onChange(newState); // Call parent function 
+
+        if(props.cardTitle){
+            state ?  axios.post("http://10.0.0.236:5000/fan_off") : axios.post("http://10.0.0.236:5000/fan_on");
+        }
     }
+
 
     return(
         <>
