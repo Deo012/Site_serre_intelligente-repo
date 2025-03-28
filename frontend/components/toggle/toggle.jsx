@@ -12,7 +12,7 @@ const Toggle = (props) => {
         props.onChange(newState); // Call parent function 
 
         if(props.cardTitle){
-            state ?  axios.post("http://10.0.0.236:5000/fan_off") : axios.post("http://10.0.0.236:5000/fan_on");
+            state ?  axios.post("http://10.0.0.236:5000/fan_off") : axios.post("http://10.0.0.236:5000/fan_on"); // fait une requete vers le serveur
         }
     }
 
