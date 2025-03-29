@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { error } from "console";
+import { io } from "socket.io-client"
 
 //  Define the data structure
 interface CardData{
@@ -14,9 +15,9 @@ interface CardData{
 
 //  Initial Data
 const initialData: CardData[] = [
-    { title: "Temperature", value: "28°C", companyName: "Amazon", switch_state: true },
-    { title: "Humidité", value: "48,2%", companyName: "Gaabor", switch_state: true },
-    { title: "Ventillateur", value: "30%", companyName: "Kingwin", switch_state: false },
+    { title: "Temperature", value: "-1°C", companyName: "Amazon", switch_state: true },
+    { title: "Humidité", value: "-1%", companyName: "Gaabor", switch_state: true },
+    { title: "Ventillateur", value: "-1%", companyName: "Kingwin", switch_state: false },
 ];
 
 //  Create Contexte
@@ -25,31 +26,30 @@ const DataContext = createContext<{
     toggleSwitchState: (index: number) => void;
 } | null>(null);
 
+const socket = io("http://localhost:3000"); // Connect to nextjs server 
+
 //  Provider component`
 //  DataProvider est de type function component. Prends comme parametre des elements renderable (FC<param>)
 export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children }) =>{
     const [cardsData, setCardsData] = useState<CardData[]>(initialData)
 
-    //  Requete vers serveur Flask pour recevoir le data
-    const fetchData = () => {
-        axios.get("http://10.0.0.236:5000/temperature")
-            .then((response) => {
+    // Updata Context data when receiving data
+    useEffect(() => {
+        const handleData = (data:any) => {
+            if (data.senderId === "backend") {
                 setCardsData([
-                    { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Amazon", switch_state: true },
-                    { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Gaabor", switch_state: true },
-                    // { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Bando", switch_state: true },
+                    { title: "Temperature", value: `${data.temp}°C`, companyName: "Amazon", switch_state: true },
+                    { title: "Humidité", value: `${data.hum}%`, companyName: "Gaabor", switch_state: true },
                     { title: "CO2", value: `${30} ppm`, companyName: "Bando", switch_state: true },
                 ]);
-            })
-            .catch((error) => console.error("Error fetching data:", error));
-    };
-
-    // Fetch data initially and then every 5 seconds
-    useEffect(() => {
-        fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 5000); // Fetch every 30 seconds
-
-        return () => clearInterval(interval); // Cleanup interval on unmount
+            }
+        };
+    
+        socket.on("update_mesurement", handleData);
+    
+        return () => {
+            socket.off("update_mesurement", handleData);  // Cleanup on unmount to avoid stack up of event listener with that name
+        };
     }, []);
 
     const toggleSwitchState = (index: number) => {

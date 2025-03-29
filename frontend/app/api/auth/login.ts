@@ -24,12 +24,12 @@ export default async function verifier (
         res.status(200).json({success: "yay", sessionId})
 
         //  Enregister dans le DB
-        const newConnection = await prisma.connection.create({
-            data:{
-                username,
-                sessionId,
-            },
-        })
+        // const newConnection = await prisma.connection.create({
+        //     data:{
+        //         username,
+        //         sessionId,
+        //     },
+        // })
 
         //  Tout a fonctionné
         res.status(201).json({ message: "User registered successfully", sessionId})
