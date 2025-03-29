@@ -1,11 +1,16 @@
+#pip install flask-socketio
+
 import threading
 from flask import Flask, jsonify
 from random import randint
 import time
 from flask_cors import CORS
+from flask_socketio import SocketIO
+from flask_socketio import send, emit
 
 app = Flask(__name__)
 CORS(app)
+socketio = SocketIO(app, cors_allowed_origins="*")  # Allow CORS for all origins
 
 donne = {
     "temp": 30,
@@ -14,20 +19,19 @@ donne = {
 }
 
 def regenerate_values():
-    """Updates dictionary values every 30 seconds."""
+    """Updates dictionary values every 2 seconds."""
     while True:
         time.sleep(2)
         for key in donne.keys():
             donne[key] = randint(10, 50)
         print(f"Updated values: {donne}")
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello world</p>"
+        # Emit new values to all connected clients
+        socketio.emit("mesured_data", {"sender": "microcontroller", "mesure": donne})
 
-@app.route("/retreiveData", methods=["GET"])
-def send_data():
-    return jsonify(donne)  # Proper JSON response
+@socketio.on("connect")
+def test_connect(auth):
+    emit("mesured_data", donne)
 
 
 if __name__ == "__main__":
@@ -37,7 +41,7 @@ if __name__ == "__main__":
         thread.start()
 
         # Run the Flask app
-        app.run(host='0.0.0.0', port=5000, debug=False)
+        socketio.run(app=app, host='0.0.0.0', port=5000, debug=False)
     except KeyboardInterrupt:
         thread.join()
 
