@@ -14,8 +14,8 @@ interface CardData{
 
 //  Initial Data
 const initialData: CardData[] = [
-    { title: "Temperature", value: "28°C", companyName: "Amazon", switch_state: true },
-    { title: "Humidité", value: "48,2%", companyName: "Gaabor", switch_state: true },
+    { title: "Arrosage", value: "28°C", companyName: "Pompe", switch_state: false },
+    { title: "Humidité", value: "48,2%", companyName: "Pompe", switch_state: false },
     { title: "Ventillateur", value: "30%", companyName: "Kingwin", switch_state: false },
 ];
 
@@ -35,10 +35,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
         axios.get("http://10.0.0.236:5000/temperature")
             .then((response) => {
                 setCardsData([
-                    { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Amazon", switch_state: true },
-                    { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Gaabor", switch_state: true },
-                    // { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Bando", switch_state: true },
-                    { title: "CO2", value: `${30} ppm`, companyName: "Bando", switch_state: true },
+                    { title: "Arrosage", value: `${response.data.temperature}°C`, companyName: "Pompe", switch_state: true },
+                    { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Pompe", switch_state: true },
+                    { title: "Ventillateur", value: `${response.data.co2} ppm`, companyName: "Kingwin", switch_state: true },
+                    // { title: "CO2", value: `${30} ppm`, companyName: "Bando", switch_state: true },
                 ]);
             })
             .catch((error) => console.error("Error fetching data:", error));
