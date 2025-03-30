@@ -3,8 +3,8 @@ import "./slideBar.css"
 import { useData } from "@/context/dataContext";
 
 const SlideBar = ()=>{
-    const { cardsData } = useData()
-    // let temp = parseInt(cardsData[1].value.replace("­­°C", ""));
+    const { capteursData } = useData()
+    // let temp = parseInt(capteursData[1].value.replace("­­°C", ""));
     let temp = (1)
     // console.log(temp)
     let [value, setValue] = useState(temp)

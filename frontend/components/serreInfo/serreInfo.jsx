@@ -3,19 +3,19 @@ import ResumeCard from "../resumeCard/resumeCard.jsx";
 import { useData } from "@/context/dataContext.tsx";
 
 const SerreInfo = () => {
-    const { cardsData } = useData();
+    const { capteursData } = useData();
     
     return(
         <>
             <div className="serre-infos">
-                {cardsData.map((card, id)=>{
+                {capteursData.map((card, id)=>{
                     return (
                         
-                            <ResumeCard
-                            key= {id}
-                            title= {card.title}
-                            value= {card.value}
-                            />
+                        <ResumeCard
+                        key= {id}
+                        title= {card.title}
+                        value= {card.value}
+                        />
                         
                     )
                 })}

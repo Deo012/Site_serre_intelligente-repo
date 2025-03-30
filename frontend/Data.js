@@ -31,7 +31,7 @@ let dataCarbone = {
     }
 }
 
-export let CardsData = [
+export let capteursData = [
     dataTemperature,
     dataHumidite,
     dataCarbone
