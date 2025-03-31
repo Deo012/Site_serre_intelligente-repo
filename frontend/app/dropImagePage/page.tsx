@@ -5,10 +5,12 @@ import "./dropImagePage.css";
 import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
 import { getPanteInfo } from "../api/getPlanteInfo/route";
+import { useData } from "@/context/dataContext";
 
 const DropImagePage = () => {
     const [file, setFile] = useState<File | null>(null); // Allow only one file
     const [plantName, setPlantName] = useState<string>("");
+    const { planteHealthInfos } = useData()
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -39,7 +41,13 @@ const DropImagePage = () => {
         }
         
         const result = await getPanteInfo(formData);
-        console.log("Plante info found: ", result)
+        planteHealthInfos.humidite_max = result.plant? result.plant.humidite_max : 0
+        planteHealthInfos.humidite_min = result.plant? result.plant.humidite_min : 0
+        planteHealthInfos.id = result.plant? result.plant.id : 0
+        planteHealthInfos.nom = result.plant? result.plant.nom : ""
+        planteHealthInfos.nom_scientifique = result.plant? result.plant.nom_scientifique : ""
+        planteHealthInfos.temp_max = result.plant? result.plant.temp_max : 0
+        planteHealthInfos.temp_min = result.plant? result.plant.temp_min : 0
     };
 
 

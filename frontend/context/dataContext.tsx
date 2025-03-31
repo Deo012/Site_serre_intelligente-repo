@@ -17,6 +17,17 @@ interface RemoteDevice{
     switch_state: boolean;
 }
 
+// Data stucture for database info
+interface PlanteInfo{
+    humidite_max: number;
+    humidite_min: number;
+    id: number;
+    nom: string;
+    nom_scientifique: string;
+    temp_max: number;
+    temp_min: number;
+}
+
 //  Initial Data
 const initialData: CapteurData[] = [
     { title: "Tempurature", value: "-11°C", companyName: "Pompe" },
@@ -29,11 +40,24 @@ const deviceList: RemoteDevice[] = [
     { title: "Ventillateur", companyName: "Kingwin", switch_state: false },
     { title: "Pompe", companyName: "Venti", switch_state: false },
 ]
+
+// initial plante infos
+const planteInfo: PlanteInfo = {
+    humidite_max: 0,
+    humidite_min: 0,
+    id: 0,
+    nom: "",
+    nom_scientifique: "",
+    temp_max: 0,
+    temp_min: 0,
+}
+
 //  Create Contexte
 const DataContext = createContext<{
     capteursData: CapteurData[];
     remoteDevices: RemoteDevice[];
     toggleSwitchState: (index: number) => void;
+    planteHealthInfos: PlanteInfo;
 } | null>(null);
 
 //  Provider component`
@@ -41,6 +65,7 @@ const DataContext = createContext<{
 export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children }) =>{
     const [capteursData, setcapteursData] = useState<CapteurData[]>(initialData)
     const [remoteDevices, setRemoteDevices] = useState<RemoteDevice[]>(deviceList)
+    const [planteHealthInfos, setPlanteHealthInfos] = useState<PlanteInfo>(planteInfo)
 
     //  Requete vers serveur Flask pour recevoir le data
     const fetchData = () => {
@@ -73,7 +98,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     };
 
     return(
-        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices}}>
+        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, planteHealthInfos}}>
             {children}
         </DataContext.Provider>
     );
@@ -82,5 +107,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
 // Custom Hook to use DataContext
 export const useData = () => {
     const context = useContext(DataContext);
+    if (!context) {
+        throw new Error("useData must be used within a DataProvider");
+    }
     return context;
 };

@@ -4,15 +4,12 @@ import React, { useEffect } from "react";
 import "./dashBoard.css"
 import SlideBar from "../../components/slideBar/slideBar.jsx";
 import CircularProgress from "../../components/circularProgress/circularProgress.jsx";
-import Toggle from "../../components/toggle/toggle.jsx";
-import Cloud from "../../components/cloud/cloud.jsx";
-import { Link } from "react-router-dom";
 import SideBar from "../../components/sideBar/sideBar.jsx";
 import ControlCards from "../../components/controlCards/controlCards.jsx";
 import Image from "next/image";
 import SerreInfo from "@/components/serreInfo/serreInfo";
-import { DataProvider } from "@/context/dataContext";
-
+import { DataProvider, useData } from "@/context/dataContext";
+import DatabaseDataDiv from "../../components/databaseDataDiv/databaseDataDiv.jsx"
 
 const DashBoard = ()=>{
 
@@ -61,7 +58,9 @@ const DashBoard = ()=>{
                     
                 </div>
                 
-                <div></div>
+                <div>
+                    <DatabaseDataDiv/>
+                </div>
 
             </div>
         </div>
