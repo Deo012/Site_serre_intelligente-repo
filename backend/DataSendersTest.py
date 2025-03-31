@@ -1,8 +1,9 @@
 import threading
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from random import randint
 import time
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +29,13 @@ def hello_world():
 @app.route("/retreiveData", methods=["GET"])
 def send_data():
     return jsonify(donne)  # Proper JSON response
+
+@app.route("/sendImage", methods=["POST"])
+def get_data():
+    file = request.files["image"]
+    filename = file.filename
+    name = "Tomato"
+    return jsonify(name)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { error } from "console";
 
 //  Define the data structure to contain sensors data
 interface CapteurData{
@@ -27,8 +26,8 @@ const initialData: CapteurData[] = [
 
 //  Liste of remote device
 const deviceList: RemoteDevice[] = [
-    { title: "Ventillateur", companyName: "Kingwin", switch_state: true },
-    { title: "Pompe", companyName: "Venti", switch_state: true },
+    { title: "Ventillateur", companyName: "Kingwin", switch_state: false },
+    { title: "Pompe", companyName: "Venti", switch_state: false },
 ]
 //  Create Contexte
 const DataContext = createContext<{

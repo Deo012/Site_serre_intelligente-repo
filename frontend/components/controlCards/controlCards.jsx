@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./controlCards.css"
 import Card from "../card/card";
-import { capteursData } from "../../Data";
 import { useData } from "@/context/dataContext";
 
 const ControlCards = () => {

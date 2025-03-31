@@ -11,6 +11,16 @@ model Connections {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 }
 
+model PlantesInfos {
+  id               Int    @id @map("_id")
+  humidite_max     Int
+  humidite_min     Int
+  nom              String
+  nom_scientifique String
+  temp_max         Int
+  temp_min         Int
+}
+
 model Users {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @db.Date
