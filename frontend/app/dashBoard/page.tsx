@@ -22,7 +22,7 @@ const DashBoard = ()=>{
 
                 <div className="haut-page">
                     <section className="haut-page-gauche">
-                        <h1>Tomate</h1>
+                        <h1>Plantation</h1>
 
                         <section className="lumiere-info">
 
@@ -33,8 +33,7 @@ const DashBoard = ()=>{
                             <div className="light-detail">
 
                                 <div>
-                                    <p>Device</p>
-                                    <p>Lumière LED Moderne Standing Lamp</p>
+                                    <p>Lumière pour plante</p>
                                 </div>
 
                                 <div>

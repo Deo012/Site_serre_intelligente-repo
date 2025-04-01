@@ -11,9 +11,9 @@ const Tete = () => {
 
                 <nav>
                     <ul className="tete-center-ul">
-                        <li><Link href="/">Home</Link></li>
-                        <li><Link href="/dashBoard">DashBoard</Link></li>
-                        <li><Link href="/dropImagePage">AI</Link></li>
+                        <li><Link href="/">Acceuil</Link></li>
+                        <li><Link href="/dashBoard">Tableau de Bord</Link></li>
+                        <li><Link href="/dropImagePage">Deposer Image</Link></li>
                     </ul>
                 </nav>
 

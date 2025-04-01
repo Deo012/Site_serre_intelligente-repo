@@ -31,14 +31,15 @@ interface PlanteInfo{
 //  Initial Data
 const initialData: CapteurData[] = [
     { title: "Tempurature", value: "-11°C", companyName: "Pompe" },
-    { title: "Humidité", value: "-11%", companyName: "Pompe" },
-    { title: "Ventillateur", value: "-11%", companyName: "Kingwin" },
+    { title: "Humidité", value: "-11%", companyName: "Test" },
+    { title: "CO2", value: "-11ppm", companyName: "Kingwin" },
 ];
 
 //  Liste of remote device
 const deviceList: RemoteDevice[] = [
     { title: "Ventillateur", companyName: "Kingwin", switch_state: false },
-    { title: "Pompe", companyName: "Venti", switch_state: false },
+    { title: "Humidité", companyName: "Pompe", switch_state: false },
+    { title: "Arrosage", companyName: "Pompe", switch_state: false }
 ]
 
 // initial plante infos
@@ -72,9 +73,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
         axios.get("http://localhost:5000/retreiveData")
             .then((response) => {
                 setcapteursData([
-                    { title: "Tempurature", value: `${response.data.temp}°C`, companyName: "Pompe" },
+                    { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Pompe" },
                     { title: "Humidité", value: `${response.data.hum}%`, companyName: "Pompe" },
-                    { title: "Ventillateur", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
+                    { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
                     // { title: "CO2", value: `${30} ppm`, companyName: "Bando" },
                 ]);
             })

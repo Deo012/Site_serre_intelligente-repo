@@ -14,7 +14,7 @@ const AcceuilPage = () => {
                 <Tete/>
 
                 <div className="acceuil-content">
-                    <a href="/connexionPage" className="accueil-btn">Connexion Page</a>
+                    <a href="/connexionPage" className="accueil-btn">Page de connexion</a>
                     <h1>Prend soin de la nature <br/>sans difficulté</h1>
                     <p>Un systeme de gestion de broussaille simple et éfficace</p>
                     

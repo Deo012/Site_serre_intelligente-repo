@@ -56,7 +56,7 @@ const DropImagePage = () => {
             <div className="dropImagePage">
                 <SideBar />
                 <div className="drop-wrap">
-                    <h1 className="main-titre">Search</h1>
+                    <h1 className="main-titre">Recherche</h1>
 
                     <div className="containeur-global-drop-image">
                         <form className="container-form" onSubmit={handleSubmit}>
@@ -67,9 +67,9 @@ const DropImagePage = () => {
                                 type="text" 
                                 id="plant-name-input" 
                                 name="plante_name"
-                                placeholder="Enter plant name"
+                                placeholder="Entrer le nom de la plante"
                                 onChange={event => setPlantName(event.target.value)} />
-                            <button type="submit"> Send </button>
+                            <button type="submit"> Envoyer </button>
                         </form>
 
                         <div className="ligne-millieu">
@@ -82,9 +82,9 @@ const DropImagePage = () => {
 
                         {file && (
                             <div className="file-list">
-                                <h3>Selected File:</h3>
+                                <h3>Fichier Selectionner:</h3>
                                 <p>{file.name}</p>
-                                <button onClick={() => setFile(null)}>Remove</button>
+                                <button onClick={() => setFile(null)}>Retirer</button>
                             </div>
                         )}
                     </div>

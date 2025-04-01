@@ -27,7 +27,7 @@ const SideBar = () => {
                         <div>
                             🏚️
                         </div>
-                        <div>Dashboard</div>
+                        <div>Tableau de bord</div>
                     </Link>
                     <Link 
                         className={pathname === "/dropImagePage" ? "menuItem active" : "menuItem"}
@@ -36,7 +36,7 @@ const SideBar = () => {
                         <div>
                             📁
                         </div>
-                        <div>Drop page</div>
+                        <div>Deposer Image</div>
                     </Link>
                     <Link 
                         className={pathname === "/" ? "menuItem active" : "menuItem"}
@@ -45,7 +45,7 @@ const SideBar = () => {
                         <div>
                             ❌
                         </div>
-                        <div>Deconnxion</div>
+                        <div>Déconnexion</div>
                     </Link>
                     <Link 
                         className={pathname === "/" ? "menuItem active" : "menuItem"}

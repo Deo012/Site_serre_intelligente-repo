@@ -13,7 +13,8 @@
 .tete-center-ul li{
     display: inline-block;
     list-style-type: none;
-    margin: 0 10%;
+    margin: 0 5%;
+    width: 20em;
 }
 .tete-container a{
     text-decoration: none;
