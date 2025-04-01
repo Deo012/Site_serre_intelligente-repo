@@ -1,97 +1,87 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import "./dropImagePage.css";
+import React, { useEffect, useState } from "react";
+import "./dropImagePage.css"
+//import loupeImg from "/assets/loupe.png"
 import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
-import { getPanteInfo } from "../api/getPlanteInfo/route";
-import { useData } from "@/context/dataContext";
+import axios from "axios";
 
 const DropImagePage = () => {
-    const [file, setFile] = useState<File | null>(null); // Allow only one file
-    const [plantName, setPlantName] = useState<string>("");
-    const { planteHealthInfos } = useData()
 
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const droppedFile = event.dataTransfer.files[0]; // Only take the first file
-        if (droppedFile) {
-            setFile(droppedFile);
+    // Explicitly define the state type as File[]
+    const [files, setFiles] = useState<File | null>(null);
+    const [result, setResult] = useState<string>("")
+
+    const handleDrop = (s: React.ChangeEvent<HTMLInputElement>) => {
+
+        if (s.target.files && s.target.files.length > 0) {
+            setFiles(s.target.files[0]);
         }
     };
 
-    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault(); // Allow drop
-    };
-
-    const handleSubmit = async (event: any) => {
-        event.preventDefault()
-        event.stopPropagation()
+    const handleUpload = async () => {
+        if (!files) return;
 
         const formData = new FormData();
-        if (plantName) {
-            formData.append("plantName", plantName); // Send plant name if available
-        } else if (file) {
-            formData.append("image", file); // Send image if no plant name
-        } else {
-            alert("Please enter a plant name or upload an image.");
-            return;
-        }
-        
-        const result = await getPanteInfo(formData);
-        planteHealthInfos.humidite_max = result.plant? result.plant.humidite_max : 0
-        planteHealthInfos.humidite_min = result.plant? result.plant.humidite_min : 0
-        planteHealthInfos.id = result.plant? result.plant.id : 0
-        planteHealthInfos.nom = result.plant? result.plant.nom : ""
-        planteHealthInfos.nom_scientifique = result.plant? result.plant.nom_scientifique : ""
-        planteHealthInfos.temp_max = result.plant? result.plant.temp_max : 0
-        planteHealthInfos.temp_min = result.plant? result.plant.temp_min : 0
+        formData.append("file", files);
+
+        const response = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        setResult(data.plant_name);
     };
 
-
-    return (
+    return(
+        <>
         <div className="container-page">
+
             <div className="dropImagePage">
-                <SideBar />
+                <SideBar/>
                 <div className="drop-wrap">
-                    <h1 className="main-titre">Recherche</h1>
+                    <h1 className="main-titre">
+                        Recherche
+                    </h1>
 
                     <div className="containeur-global-drop-image">
-                        <form className="container-form" onSubmit={handleSubmit}>
-                            <label htmlFor="plant-name-input">
-                                <Image src="/assets/loupe.png" alt="Search Icon" width={30} height={30} />
-                            </label>
-                            <input 
-                                type="text" 
-                                id="plant-name-input" 
-                                name="plante_name"
-                                placeholder="Entrer le nom de la plante"
-                                onChange={event => setPlantName(event.target.value)} />
-                            <button type="submit"> Envoyer </button>
+                        <form className="container-form" action="">
+                            <label htmlFor="plant-name-input"><Image src="/assets/loupe.png" alt="" width={30} height={30}/></label>
+                            <input type="text" name="" id="plant-name-input" placeholder="Enter plant name"/>
                         </form>
 
                         <div className="ligne-millieu">
                             <span>OU</span>
                         </div>
 
-                        <div id="glisser-area" onDrop={handleDrop} onDragOver={handleDragOver}>
-                            Faire glisser une image
+                        <div id="glisser-area">
+                            <input type="file" accept="image/" onChange={handleDrop}/>
                         </div>
+                        <button  onClick={handleUpload}>Send</button>
 
-                        {file && (
+                        {result && <h2>Plant Identified: {result}</h2>}
+
+                        {/* {files.length > 0 && (
                             <div className="file-list">
-                                <h3>Fichier Selectionner:</h3>
-                                <p>{file.name}</p>
-                                <button onClick={() => setFile(null)}>Retirer</button>
+                                <h3>Selected Files:</h3>
+                                <ul>
+                                    {files.map((file, index) => (
+                                        <li key={index}>{file.name}</li>
+                                    ))}
+                                </ul>
                             </div>
-                        )}
+                        )} */}
+
                     </div>
+
                 </div>
             </div>
+            
         </div>
+        </>
     );
-};
+}
 
 export default DropImagePage;

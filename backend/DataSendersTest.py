@@ -3,10 +3,26 @@ from flask import Flask, jsonify, request
 from random import randint
 import time
 from flask_cors import CORS
-
+import os
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image
+import numpy as np
 
 app = Flask(__name__)
 CORS(app)
+
+model = tf.keras.models.load_model("plant_recognition_model.keras")
+
+class_names = ["Aloe_Vera", "Orchids", "Pothos"]  
+
+def predict_plant(img_path):
+    img = image.load_img(img_path, target_size=(128, 128))
+    img_array = image.img_to_array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+
+    prediction = model.predict(img_array)
+    class_index = np.argmax(prediction)  
+    return class_names[class_index]
 
 donne = {
     "temp": 30,
@@ -30,12 +46,21 @@ def hello_world():
 def send_data():
     return jsonify(donne)  # Proper JSON response
 
-@app.route("/sendImage", methods=["POST"])
-def get_data():
-    file = request.files["image"]
-    filename = file.filename
-    name = "Tomato"
-    return jsonify(name)
+@app.route("/predict", methods=["POST"])
+def predict():
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files["file"]
+    file_path = "uploads/" + file.filename
+
+
+    os.makedirs("uploads", exist_ok=True)
+
+    file.save(file_path)
+    plant_name = predict_plant(file_path)
+
+    return jsonify({"plant_name": plant_name})
 
 
 if __name__ == "__main__":
@@ -48,6 +73,3 @@ if __name__ == "__main__":
         app.run(host='0.0.0.0', port=5000, debug=False)
     except KeyboardInterrupt:
         thread.join()
-
-
-
