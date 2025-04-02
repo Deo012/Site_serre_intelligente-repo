@@ -5,11 +5,20 @@ import time
 from flask_cors import CORS
 import os
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image
+from keras.preprocessing import image
 import numpy as np
+from pymongo import MongoClient
 
 app = Flask(__name__)
 CORS(app)
+
+
+mongo_uri = 'mongodb://localhost:27017/'
+client = MongoClient(mongo_uri)
+
+db_name = 'serreIntelligente'
+
+connection = client[db_name]
 
 model = tf.keras.models.load_model("plant_recognition_model.keras")
 
@@ -24,6 +33,15 @@ def predict_plant(img_path):
     class_index = np.argmax(prediction)  
     return class_names[class_index]
 
+def dataPlant(nomPlant):
+    collection_nom = "InformationSurPlante"
+    collection = connection[collection_nom]
+
+    data = collection.find_one({"common_name": nomPlant}, {"_id": 0})
+
+    return data
+
+
 donne = {
     "temp": 30,
     "hum": 20,
@@ -36,7 +54,7 @@ def regenerate_values():
         time.sleep(2)
         for key in donne.keys():
             donne[key] = randint(10, 50)
-        print(f"Updated values: {donne}")
+        # print(f"Updated values: {donne}")
 
 @app.route("/")
 def hello_world():
@@ -60,7 +78,9 @@ def predict():
     file.save(file_path)
     plant_name = predict_plant(file_path)
 
-    return jsonify({"plant_name": plant_name})
+    plant_data = dataPlant(plant_name)
+
+    return jsonify({"plant_name": plant_name, "plant_info": plant_data})
 
 
 if __name__ == "__main__":

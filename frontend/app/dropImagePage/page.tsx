@@ -33,6 +33,9 @@ const DropImagePage = () => {
 
         const data = await response.json();
         setResult(data.plant_name);
+        // formData.set('plantName',data.plant_name)
+
+        console.log(data.plant_info)
     };
 
     return(
