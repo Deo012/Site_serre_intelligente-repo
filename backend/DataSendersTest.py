@@ -56,6 +56,11 @@ def regenerate_values():
             donne[key] = randint(10, 50)
         # print(f"Updated values: {donne}")
 
+@app.route("/retrievePltData", methods=["GET"])
+def send_data():
+    return jsonify({"plantData": plant_data})
+    
+
 @app.route("/")
 def hello_world():
     return "<p>Hello world</p>"
@@ -78,6 +83,7 @@ def predict():
     file.save(file_path)
     plant_name = predict_plant(file_path)
 
+    global plant_data
     plant_data = dataPlant(plant_name)
 
     return jsonify({"plant_name": plant_name, "plant_info": plant_data})

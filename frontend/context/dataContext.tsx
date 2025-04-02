@@ -58,7 +58,7 @@ const DataContext = createContext<{
     capteursData: CapteurData[];
     remoteDevices: RemoteDevice[];
     toggleSwitchState: (index: number) => void;
-    planteHealthInfos: PlanteInfo;
+    plantdata: PlanteInfo;
 } | null>(null);
 
 //  Provider component`
@@ -66,7 +66,7 @@ const DataContext = createContext<{
 export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children }) =>{
     const [capteursData, setcapteursData] = useState<CapteurData[]>(initialData)
     const [remoteDevices, setRemoteDevices] = useState<RemoteDevice[]>(deviceList)
-    const [planteHealthInfos, setPlanteHealthInfos] = useState<PlanteInfo>(planteInfo)
+    const [plantdata, setplantdata] = useState<PlanteInfo>(planteInfo)
 
     //  Requete vers serveur Flask pour recevoir le data
     const fetchData = () => {
@@ -82,10 +82,27 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
             .catch((error) => console.error("Error fetching data:", error));
     };
 
+    // const fetchPlantData = () => {
+    //     axios.get("http://127.0.0.1:5000/retrievePltData")
+    //         .then((response) => {
+    //             setplantdata({
+    //                 humidite_max: response.data.plantData.max_humidity,
+    //                 humidite_min: response.data.plantData.mix_humidity,
+    //                 id: 0,
+    //                 nom: response.data.plantData.common_name,
+    //                 nom_scientifique: "",
+    //                 temp_max: response.data.plantData.max_temperature,
+    //                 temp_min: response.data.plantData.min_temperature,
+    //             })
+    //         })
+    // }
+
     // Fetch data initially and then every 5 seconds
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 5000); // Fetch every 30 seconds
+
+        //fetchPlantData();
 
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
@@ -99,7 +116,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     };
 
     return(
-        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, planteHealthInfos}}>
+        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, plantdata}}>
             {children}
         </DataContext.Provider>
     );

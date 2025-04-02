@@ -5,31 +5,31 @@ import { useData } from "@/context/dataContext";
 import "./databaseDataDiv.css"
 
 const DatabaseDataDiv = () => {
-    //const {planteHealthInfos: plantdata} = useData()
-    const [plantdata , setPlantData] = useState("")
+    //const {planteHealthInfos} = useData()
+    const {plantdata} = useData()
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
-        // fetch("http://127.0.0.1:5000/predict", {
-        //     method: "POST",
-        //     body: new FormData(),
-        // })
-        // const data = response.json();
-        // setResult(data.plant_info);
+    //     // fetch("http://127.0.0.1:5000/predict", {
+    //     //     method: "POST",
+    //     //     body: new FormData(),
+    //     // })
+    //     // const data = response.json();
+    //     // setResult(data.plant_info);
 
         
 
-    })
+    // })
 
     return(
         <section className="database-data-div">
             <ul>
-                <li>Nom Plante: {plantdata.common_name}</li>
-                <li>Temperature min: {plantdata.min_temperature}</li>
-                <li>Temperature max: {plantdata.max_temperature}</li>
-                <li>Humidité max: {plantdata.min_humidity}</li>
-                <li>Humidité min: {plantdata.max_humidity}</li>
+                <li>Nom Plante: {plantdata.nom}</li>
+                <li>Temperature min: {plantdata.temp_min}</li>
+                <li>Temperature max: {plantdata.temp_max}</li>
+                <li>Humidité max: {plantdata.humidite_max}</li>
+                <li>Humidité min: {plantdata.humidite_min}</li>
             </ul>
         </section>
     );

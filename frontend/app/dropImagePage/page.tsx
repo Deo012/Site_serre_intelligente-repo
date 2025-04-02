@@ -6,12 +6,14 @@ import "./dropImagePage.css"
 import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
 import axios from "axios";
+import { useData } from "@/context/dataContext";
 
 const DropImagePage = () => {
 
     // Explicitly define the state type as File[]
     const [files, setFiles] = useState<File | null>(null);
     const [result, setResult] = useState<string>("")
+    const {plantdata} = useData()
 
 
     const handleDrop = (s: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +39,15 @@ const DropImagePage = () => {
         // formData.set('plantName',data.plant_name)
 
         console.log(data.plant_info)
+
+        plantdata.humidite_max =  data.plant_info.max_humidity,
+        plantdata.humidite_min= data.plant_info.min_humidity,
+        plantdata.id = 0,
+        plantdata.nom= data.plant_info.common_name,
+        plantdata.nom_scientifique= "",
+        plantdata.temp_max= data.plant_info.max_temperature,
+        plantdata.temp_min= data.plant_info.min_temperature
+
     };
 
     return(
