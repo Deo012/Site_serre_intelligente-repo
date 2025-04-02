@@ -13,6 +13,7 @@ const DropImagePage = () => {
     const [files, setFiles] = useState<File | null>(null);
     const [result, setResult] = useState<string>("")
 
+
     const handleDrop = (s: React.ChangeEvent<HTMLInputElement>) => {
 
         if (s.target.files && s.target.files.length > 0) {
