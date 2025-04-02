@@ -56,9 +56,9 @@ def regenerate_values():
             donne[key] = randint(10, 50)
         # print(f"Updated values: {donne}")
 
-@app.route("/retrievePltData", methods=["GET"])
-def send_data():
-    return jsonify({"plantData": plant_data})
+# @app.route("/retrievePltData", methods=["GET"])
+# def send_data():
+#     return jsonify({"plantData": plant_data})
     
 
 @app.route("/")
