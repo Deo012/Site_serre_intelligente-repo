@@ -26,7 +26,8 @@ export async function getPanteInfo(formData: FormData) {
         const flaskData = await response.json();
         console.log("Flask Response:", flaskData);
 
-        return await databaseInfo(flaskData.name);
+        const plant_health = await databaseInfo(flaskData.plant_name);
+        return plant_health;
     }
 
     return { error: "Please provide either a plant name or an image." };
@@ -34,7 +35,7 @@ export async function getPanteInfo(formData: FormData) {
 
 const databaseInfo = async (plantName: string) => {
     const plantData = await prisma.plantesInfos.findFirst({
-        where: { nom: plantName },
+        where: { common_name: plantName },
     });
 
     if (!plantData) {

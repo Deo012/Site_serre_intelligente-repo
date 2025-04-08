@@ -32,14 +32,22 @@ const ControlCards = () => {
             setStatus(prev => ({ ...prev, tempStat: "chaud" }));
             if (!remoteDevices[0].switch_state) 
                 toggleSwitchState(0);   // Si éteint allume les ventillateurs
+            console.log("Ventillateur allume")
+            // To-Do: ajouter logique pour éteindre les lumières chauffantes
         
         } else if (temp_actuel < temp_min) {
 
             setStatus(prev => ({ ...prev, tempStat: "froid" }));
+            if (remoteDevices[0].switch_state) 
+                toggleSwitchState(0);   // Si allumé, éteindre les ventillateurs
+            console.log("Ventillateur eteint")
             // To-Do: ajouter logique pour allumer les lumières chauffantes
 
         } else {
             setStatus(prev => ({ ...prev, tempStat: "neutre" }));
+            if (remoteDevices[0].switch_state) 
+                toggleSwitchState(0);   // Si allumé, éteindre les ventillateurs
+            console.log("Ventillateur eteint")
         }
     }, [capteursData, plantdata, remoteDevices, toggleSwitchState]);
 

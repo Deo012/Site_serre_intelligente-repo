@@ -74,17 +74,6 @@ const DropImagePage = () => {
 
                         {result && <h2>Plant Identified: {result}</h2>}
 
-                        {/* {files.length > 0 && (
-                            <div className="file-list">
-                                <h3>Selected Files:</h3>
-                                <ul>
-                                    {files.map((file, index) => (
-                                        <li key={index}>{file.name}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )} */}
-
                     </div>
 
                 </div>

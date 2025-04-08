@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./toggle.css";
 import axios from "axios";
 
 const Toggle = (props) => {
 
     let [state, setState] = useState(props.checked)
+
+    // ✅ Sync local state with props.checked
+    useEffect(() => {
+        setState(props.checked);
+    }, [props.checked]);
 
     function handleClick() {
         const newState = !state;

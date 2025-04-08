@@ -25,10 +25,10 @@
 }
 /*Hot cards*/
 .compact-card .chaud{
-    background-color: lightcoral;
+    background: lightcoral;
 }
 
 /*cold cards*/
-.compact-card .chaud{
-    background-color: lightcyan;
+.compact-card .froid{
+    background: blue;
 }
