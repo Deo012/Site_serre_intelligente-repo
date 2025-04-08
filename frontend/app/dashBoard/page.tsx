@@ -5,7 +5,7 @@ import "./dashBoard.css"
 import SlideBar from "../../components/slideBar/slideBar.jsx";
 import CircularProgress from "../../components/circularProgress/circularProgress.jsx";
 import SideBar from "../../components/sideBar/sideBar.jsx";
-import ControlCards from "../../components/controlCards/controlCards.jsx";
+import ControlCards from "../../components/controlCards/controlCards";
 import Image from "next/image";
 import SerreInfo from "@/components/serreInfo/serreInfo";
 import { DataProvider, useData } from "@/context/dataContext";
@@ -43,7 +43,7 @@ const DashBoard = ()=>{
                             </div>
 
                             <section className="temp-control">
-                                <CircularProgress></CircularProgress>
+                                <CircularProgress/>
                             </section>
 
                         </section>

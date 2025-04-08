@@ -17,9 +17,18 @@
 }
 .container-switch{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .container-info{
     display: flex;
     flex-direction: column;
+}
+/*Hot cards*/
+.compact-card .chaud{
+    background-color: lightcoral;
+}
+
+/*cold cards*/
+.compact-card .chaud{
+    background-color: lightcyan;
 }

@@ -23,7 +23,6 @@ interface PlanteInfo{
     humidite_min: number;
     id: number;
     nom: string;
-    nom_scientifique: string;
     temp_max: number;
     temp_min: number;
 }
@@ -48,7 +47,6 @@ const planteInfo: PlanteInfo = {
     humidite_min: 0,
     id: 0,
     nom: "",
-    nom_scientifique: "",
     temp_max: 0,
     temp_min: 0,
 }
@@ -76,26 +74,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
                     { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Pompe" },
                     { title: "Humidité", value: `${response.data.hum}%`, companyName: "Pompe" },
                     { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
-                    // { title: "CO2", value: `${30} ppm`, companyName: "Bando" },
                 ]);
             })
             .catch((error) => console.error("Error fetching data:", error));
     };
-
-    // const fetchPlantData = () => {
-    //     axios.get("http://127.0.0.1:5000/retrievePltData")
-    //         .then((response) => {
-    //             setplantdata({
-    //                 humidite_max: response.data.plantData.max_humidity,
-    //                 humidite_min: response.data.plantData.mix_humidity,
-    //                 id: 0,
-    //                 nom: response.data.plantData.common_name,
-    //                 nom_scientifique: "",
-    //                 temp_max: response.data.plantData.max_temperature,
-    //                 temp_min: response.data.plantData.min_temperature,
-    //             })
-    //         })
-    // }
 
     // Fetch data initially and then every 5 seconds
     useEffect(() => {

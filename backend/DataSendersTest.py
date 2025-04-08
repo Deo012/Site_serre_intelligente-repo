@@ -71,10 +71,10 @@ def send_data():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    if "file" not in request.files:
+    if "imageFile" not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
 
-    file = request.files["file"]
+    file = request.files["imageFile"]
     file_path = "uploads/" + file.filename
 
 
