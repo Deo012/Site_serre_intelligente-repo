@@ -24,13 +24,10 @@ const Card = (props)=>{
 function CompactCard({param}){
     const { switch_state, onToggle, title, companyName, stateStyle } = param;
 
+    console.log("Voci l'etat dela card temp", stateStyle)
+
     return(
-        <div className={`compact-card ${stateStyle}`}
-        style={{
-            background : "lightblue",
-            boxShadow : "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
-        }}
-        >
+        <div className={`compact-card ${stateStyle}`}>
             <div className="container-switch">
                 <Toggle
                 checked = {switch_state}

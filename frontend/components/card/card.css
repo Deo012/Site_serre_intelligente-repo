@@ -11,6 +11,9 @@
     cursor: pointer;
     padding: 1rem;
     justify-content: space-between;
+    box-shadow : "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px";
+    background: lightblue;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 .compact-card:hover{
     box-shadow: none;
@@ -24,11 +27,11 @@
     flex-direction: column;
 }
 /*Hot cards*/
-.compact-card .chaud{
+.compact-card.chaud{
     background: lightcoral;
 }
 
 /*cold cards*/
-.compact-card .froid{
+.compact-card.froid{
     background: blue;
 }
