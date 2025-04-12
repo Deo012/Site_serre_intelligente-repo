@@ -23,7 +23,6 @@ interface PlanteInfo{
     humidite_min: number;
     id: number;
     nom: string;
-    nom_scientifique: string;
     temp_max: number;
     temp_min: number;
 }
@@ -48,7 +47,6 @@ const planteInfo: PlanteInfo = {
     humidite_min: 0,
     id: 0,
     nom: "",
-    nom_scientifique: "",
     temp_max: 0,
     temp_min: 0,
 }
@@ -58,7 +56,7 @@ const DataContext = createContext<{
     capteursData: CapteurData[];
     remoteDevices: RemoteDevice[];
     toggleSwitchState: (index: number) => void;
-    planteHealthInfos: PlanteInfo;
+    plantdata: PlanteInfo;
 } | null>(null);
 
 //  Provider component`
@@ -66,7 +64,7 @@ const DataContext = createContext<{
 export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children }) =>{
     const [capteursData, setcapteursData] = useState<CapteurData[]>(initialData)
     const [remoteDevices, setRemoteDevices] = useState<RemoteDevice[]>(deviceList)
-    const [planteHealthInfos, setPlanteHealthInfos] = useState<PlanteInfo>(planteInfo)
+    const [plantdata, setplantdata] = useState<PlanteInfo>(planteInfo)
 
     //  Requete vers serveur Flask pour recevoir le data
     const fetchData = () => {
@@ -77,7 +75,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
                     { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Pompe" },
                     { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Pompe" },
                     { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
-                    // { title: "CO2", value: `${30} ppm`, companyName: "Bando" },
                 ]);
             })
             .catch((error) => console.error("Error fetching data:", error));
@@ -87,6 +84,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 5000); // Fetch every 30 seconds
+
+        //fetchPlantData();
 
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
@@ -100,7 +99,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     };
 
     return(
-        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, planteHealthInfos}}>
+        <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, plantdata}}>
             {children}
         </DataContext.Provider>
     );

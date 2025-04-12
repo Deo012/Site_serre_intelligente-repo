@@ -14,13 +14,14 @@ model Connections {
 }
 
 model PlantesInfos {
-  id               Int    @id @map("_id")
-  humidite_max     Int
-  humidite_min     Int
-  nom              String
-  nom_scientifique String
-  temp_max         Int
-  temp_min         Int
+  id                Int    @id @map("_id")
+  common_name       String
+  max_humidity      Int
+  max_temperature   Int
+  min_humidity      Int
+  min_temperature   Int
+  optimal_soil_type String
+  water_needed_ml   Int
 }
 
 model Users {
