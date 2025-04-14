@@ -10,7 +10,7 @@ import numpy as np
 from pymongo import MongoClient
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="*")
 
 
 mongo_uri = 'mongodb://localhost:27017/'
@@ -43,8 +43,8 @@ def dataPlant(nomPlant):
 
 
 donne = {
-    "temp": 30,
-    "hum": 20,
+    "temperature": 30,
+    "humidity": 20,
     "co2": 40
 }
 
@@ -65,7 +65,7 @@ def regenerate_values():
 def hello_world():
     return "<p>Hello world</p>"
 
-@app.route("/retreiveData", methods=["GET"])
+@app.route("/temperature", methods=["GET"])
 def send_data():
     return jsonify(donne)  # Proper JSON response
 

@@ -10,6 +10,7 @@ import Image from "next/image";
 import SerreInfo from "@/components/serreInfo/serreInfo";
 import { DataProvider, useData } from "@/context/dataContext";
 import DatabaseDataDiv from "../../components/databaseDataDiv/databaseDataDiv.jsx"
+import LightSwitch from "../../components/lightSwitch/lightSwitch"
 
 const DashBoard = ()=>{
 
@@ -37,7 +38,7 @@ const DashBoard = ()=>{
                                 </div>
 
                                 <div>
-                                    <SlideBar/>
+                                    <LightSwitch/>
                                 </div>
 
                             </div>
@@ -57,7 +58,7 @@ const DashBoard = ()=>{
                     
                 </div>
                 
-                <div>
+                <div className="complementaire-data"> 
                     <DatabaseDataDiv/>
                 </div>
 

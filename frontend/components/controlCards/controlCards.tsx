@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./controlCards.css"
 import Card from "../card/card";
 import { useData } from "@/context/dataContext";
-import { type } from "os";
+import axios from "axios";
 
 const ControlCards = () => {
     const {remoteDevices, toggleSwitchState, plantdata, capteursData} = useData();
@@ -30,23 +30,19 @@ const ControlCards = () => {
         if (temp_actuel > temp_max) {
 
             setStatus(prev => ({ ...prev, tempStat: "chaud" }));
-            if (!remoteDevices[0].switch_state) 
-                toggleSwitchState(0);   // Si éteint allume les ventillateurs
+            axios.post("http://10.0.0.236:5000/fan_on")
             console.log("Ventillateur allume")
             // To-Do: ajouter logique pour éteindre les lumières chauffantes
         
         } else if (temp_actuel < temp_min) {
 
             setStatus(prev => ({ ...prev, tempStat: "froid" }));
-            if (remoteDevices[0].switch_state) 
-                toggleSwitchState(0);   // Si allumé, éteindre les ventillateurs
+            axios.post("http://10.0.0.236:5000/fan_off")
             console.log("Ventillateur eteint")
             // To-Do: ajouter logique pour allumer les lumières chauffantes
 
         } else {
             setStatus(prev => ({ ...prev, tempStat: "neutre" }));
-            if (remoteDevices[0].switch_state) 
-                toggleSwitchState(0);   // Si allumé, éteindre les ventillateurs
             console.log("Ventillateur eteint")
         }
     }, [capteursData, plantdata, remoteDevices, toggleSwitchState]);
