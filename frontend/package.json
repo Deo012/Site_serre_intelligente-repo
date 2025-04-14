@@ -8,6 +8,9 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.2",
     "@prisma/client": "^6.5.0",
     "axios": "^1.8.3",
     "next": "15.2.2",
