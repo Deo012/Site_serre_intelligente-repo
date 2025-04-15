@@ -9,6 +9,5 @@ export default async function DashBoardPage() {
   if (!token || !verifyToken(token)) {
     redirect('/connexionPage')
   }
-
   return <DashBoard />
 }
