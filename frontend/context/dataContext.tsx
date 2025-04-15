@@ -72,6 +72,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
         // axios.get("http://10.0.0.236:5000/temperature")
             .then((response) => {
                 setcapteursData([
+                    // { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Pompe" },
+                    // { title: "Humidité", value: `${response.data.hum}%`, companyName: "Pompe" },
+
                     { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Pompe" },
                     { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Pompe" },
                     { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
