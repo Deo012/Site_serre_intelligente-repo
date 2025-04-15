@@ -68,8 +68,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
 
     //  Requete vers serveur Flask pour recevoir le data
     const fetchData = () => {
-        axios.get("http://localhost:5000/temperature")
-        // axios.get("http://10.0.0.236:5000/temperature")
+        // axios.get("http://localhost:5000/temperature")
+        axios.get("http://10.0.0.236:5000/temperature")
             .then((response) => {
                 setcapteursData([
                     // { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Pompe" },

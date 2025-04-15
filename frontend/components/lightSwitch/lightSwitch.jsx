@@ -74,9 +74,9 @@ export default function CustomLightSwitch() {
 
     try {
       if (isChecked) {
-        await axios.get("http://your-backend-ip/light/on");
+        await axios.get("http://10.0.0.236:5000/led_on");
       } else {
-        await axios.get("http://your-backend-ip/light/off");
+        await axios.get("http://10.0.0.236:5000/led_off");
       }
       console.log("Switch toggled: ", isChecked);
     } catch (error) {
