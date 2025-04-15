@@ -1,6 +1,7 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
+import { MongoClient } from 'mongodb';
 
 const prisma = new PrismaClient();
 
@@ -34,12 +35,34 @@ export async function getPanteInfo(formData: FormData) {
 }
 
 const databaseInfo = async (plantName: string) => {
-    const plantData = await prisma.plantesInfos.findFirst({
-        where: { common_name: plantName },
-    });
+    try {
+        const plantData = await prisma.plantesInfos.findFirst({
+            where: { common_name: plantName },
+        });
 
-    if (!plantData) {
-        return { error: "No plant found in the database." };
+        if (plantData) {
+            return { plant: plantData };
+        }
+    } catch (err) {
+        console.error("Failed to fetch from Prisma:", err);
     }
-    return { plant: plantData };
+
+    // Fallback to local MongoDB
+    try {
+        const client = new MongoClient("mongodb://localhost:27017");
+        await client.connect();
+        const db = client.db("serre_intelligente");
+        const collection = db.collection("PlantesInfos");
+
+        const plant = await collection.findOne({ common_name: plantName });
+
+        if (!plant) {
+            return { error: "No plant found in either database." };
+        }
+
+        return { plant };
+    } catch (err) {
+        console.error("Failed to fetch from local MongoDB:", err);
+        return { error: "Database error occurred." };
+    }
 };
