@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84cdf"
-  },
+  "_id": 1,
   "common_name": "Snake Plant",
   "min_humidity": 30,
   "max_humidity": 50,
@@ -11,9 +9,7 @@
   "water_needed_ml": 250
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce0"
-  },
+  "_id": 2,
   "common_name": "ZZ Plant",
   "min_humidity": 30,
   "max_humidity": 50,
@@ -23,9 +19,7 @@
   "water_needed_ml": 200
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce1"
-  },
+  "_id": 3,
   "common_name": "Pothos",
   "min_humidity": 40,
   "max_humidity": 60,
@@ -35,9 +29,7 @@
   "water_needed_ml": 300
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce2"
-  },
+  "_id": 4,
   "common_name": "Peace Lily",
   "min_humidity": 50,
   "max_humidity": 80,
@@ -47,9 +39,7 @@
   "water_needed_ml": 350
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce3"
-  },
+  "_id": 5,
   "common_name": "Spider Plant",
   "min_humidity": 40,
   "max_humidity": 70,
@@ -59,9 +49,7 @@
   "water_needed_ml": 250
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce4"
-  },
+  "_id": 6,
   "common_name": "Chinese Evergreen",
   "min_humidity": 50,
   "max_humidity": 80,
@@ -71,9 +59,7 @@
   "water_needed_ml": 300
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce5"
-  },
+  "_id": 7,
   "common_name": "Aloe_Vera",
   "min_humidity": 30,
   "max_humidity": 50,
@@ -83,9 +69,7 @@
   "water_needed_ml": 150
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce6"
-  },
+  "_id": 8,
   "common_name": "Areca Palm",
   "min_humidity": 50,
   "max_humidity": 80,
@@ -95,9 +79,7 @@
   "water_needed_ml": 400
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce7"
-  },
+  "_id": 9,
   "common_name": "Rubber Plant",
   "min_humidity": 40,
   "max_humidity": 60,
@@ -107,9 +89,7 @@
   "water_needed_ml": 300
 },
 {
-  "_id": {
-    "$oid": "67cef1a570bdcd1d89f84ce8"
-  },
+  "_id": 10,
   "common_name": "Boston Fern",
   "min_humidity": 60,
   "max_humidity": 90,
@@ -119,9 +99,7 @@
   "water_needed_ml": 500
 },
 {
-  "_id": {
-    "$oid": "67ecb1f67c698d0c9ad448e6"
-  },
+  "_id": 11,
   "common_name": "Orchids",
   "min_humidity": 50,
   "max_humidity": 80,
