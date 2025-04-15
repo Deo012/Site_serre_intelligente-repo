@@ -4,6 +4,8 @@ import Card from "../card/card";
 import { useData } from "@/context/dataContext";
 import axios from "axios";
 
+let singleuse = false
+
 const ControlCards = () => {
     const {remoteDevices, toggleSwitchState, plantdata, capteursData} = useData();
     interface CardStatus {
@@ -32,6 +34,7 @@ const ControlCards = () => {
             setStatus(prev => ({ ...prev, tempStat: "chaud" }));
             axios.post("http://10.0.0.238:5000/fan_on")
             console.log("Ventillateur allume")
+            singleuse = true
             // To-Do: ajouter logique pour éteindre les lumières chauffantes
         
         } else if (temp_actuel < temp_min) {
@@ -44,7 +47,11 @@ const ControlCards = () => {
         } else {
             setStatus(prev => ({ ...prev, tempStat: "neutre" }));
             console.log("Ventillateur eteint")
-            axios.post("http://10.0.0.238:5000/fan_off")
+            if ( singleuse == true){
+                axios.post("http://10.0.0.238:5000/fan_off")
+            }
+            singleuse = false
+            // axios.post("http://10.0.0.238:5000/fan_off")
         }
     }, [capteursData, plantdata, remoteDevices, toggleSwitchState]);
 
