@@ -1,27 +1,34 @@
-
-import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import { error } from "console";
+import { MongoClient } from "mongodb";
 
-const prisma = new PrismaClient();
 const SECRET = process.env.JWT_SECRET || "your-secret";
+const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-    const body = await req.json(); // ✅ This is how you get POST data in App Router
+    const body = await req.json();
     const { username, password } = body;
 
-    const user = await prisma.users.findFirst({
-        where: { username: username }
-    });
+    let user;
 
-    if (!user) {
-        return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });
+    try {
+        // Try Prisma (remote DB)
+        user = await prisma.users.findFirst({ where: { username } });
+        console.log("User found with Prisma:", user);
+    } catch (error) {
+        console.warn("Prisma failed. Falling back to MongoDB:", error);
+
+        // Use MongoDB fallback
+        const client = new MongoClient("mongodb://localhost:27017");
+        await client.connect();
+        const db = client.db("serre_intelligente");
+        user = await db.collection("Users").findOne({ username });
+        console.log("User found with MongoDB fallback:", user);
     }
 
-    console.log("User from DB:", user);
-
-    const validPassword = password === user.password;
-    if (!validPassword) {
+    if (!user || user.password !== password) {
         return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });
     }
 

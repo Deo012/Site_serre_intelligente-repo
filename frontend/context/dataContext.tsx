@@ -43,12 +43,12 @@ const deviceList: RemoteDevice[] = [
 
 // initial plante infos
 const planteInfo: PlanteInfo = {
-    humidite_max: 0,
-    humidite_min: 0,
+    humidite_max: 999,
+    humidite_min: -999,
     id: 0,
     nom: "",
-    temp_max: 0,
-    temp_min: 0,
+    temp_max: 999,
+    temp_min: -999,
 }
 
 //  Create Contexte
