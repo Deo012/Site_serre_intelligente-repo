@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 
 const ConnexionPage = () => {
     const router = useRouter()
+    
+    // State to handle login success
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Rechercher l'utilisateur et vérifier les infos quand le form html est soummis
     async function handelSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -26,9 +29,16 @@ const ConnexionPage = () => {
         });
 
         if(reponse.ok){
-            router.push("/dashBoard");
+            setIsLoggedIn(true); // Trigger state change
         }
     }
+
+    // After login success, redirect to the dashboard
+    useEffect(() => {
+        if (isLoggedIn) {
+            router.push("/dashBoard");
+        }
+    }, [isLoggedIn]);
 
     //Pour ajouter le script pour les icone fontawesome
     useEffect(() => {
