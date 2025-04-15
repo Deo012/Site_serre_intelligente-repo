@@ -30,20 +30,21 @@ const ControlCards = () => {
         if (temp_actuel > temp_max) {
 
             setStatus(prev => ({ ...prev, tempStat: "chaud" }));
-            axios.post("http://10.0.0.236:5000/fan_on")
+            axios.post("http://10.0.0.238:5000/fan_on")
             console.log("Ventillateur allume")
             // To-Do: ajouter logique pour éteindre les lumières chauffantes
         
         } else if (temp_actuel < temp_min) {
 
             setStatus(prev => ({ ...prev, tempStat: "froid" }));
-            axios.post("http://10.0.0.236:5000/fan_off")
+            axios.post("http://10.0.0.238:5000/fan_off")
             console.log("Ventillateur eteint")
             // To-Do: ajouter logique pour allumer les lumières chauffantes
 
         } else {
             setStatus(prev => ({ ...prev, tempStat: "neutre" }));
             console.log("Ventillateur eteint")
+            axios.post("http://10.0.0.238:5000/fan_off")
         }
     }, [capteursData, plantdata, remoteDevices, toggleSwitchState]);
 
