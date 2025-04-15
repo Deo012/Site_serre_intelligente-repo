@@ -8,6 +8,18 @@ import { usePathname } from "next/navigation";
 
 const SideBar = () => {
     const pathname = usePathname();
+
+    const handleLogout = async () => {
+        const response = await fetch("/api/auth/logout", {
+            method: "POST",
+        });
+    
+        if (response.ok) {
+            // Redirige vers la page de connexion par exemple
+            window.location.href = "/connexionPage";
+        }
+    };
+
     return(
         <>
             <div className="sideBar">
@@ -38,15 +50,12 @@ const SideBar = () => {
                         </div>
                         <div>Deposer Image</div>
                     </Link>
-                    <Link 
-                        className={pathname === "/" ? "menuItem active" : "menuItem"}
-                        href="/"
-                    >
-                        <div>
-                            ❌
-                        </div>
-                        <div>Déconnexion</div>
-                    </Link>
+
+                         <button className="menuItem" onClick={handleLogout}>
+                            <div>❌</div>
+                            <div>Déconnexion</div>
+                        </button>
+            
                     <Link 
                         className={pathname === "/" ? "menuItem active" : "menuItem"}
                         href="/"
