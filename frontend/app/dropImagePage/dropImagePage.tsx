@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import "./dropImagePage.css"
-//import loupeImg from "/assets/loupe.png"
 import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
-import axios from "axios";
 import { useData } from "@/context/dataContext";
 
 const DropImagePage = () => {
@@ -25,6 +23,7 @@ const DropImagePage = () => {
     };
 
     const handleUpload = async () => {
+
         const formData = new FormData();
         if (files) formData.append("imageFile", files);
         if (enterPlant) formData.append("plantName", enterPlant);
@@ -61,7 +60,7 @@ const DropImagePage = () => {
                     <div className="containeur-global-drop-image">
                         <form className="container-form" action="">
                             <label htmlFor="plant-name-input"><Image src="/assets/loupe.png" alt="" width={30} height={30}/></label>
-                            <input type="text" name="" id="plant-name-input" placeholder="Entrez le nom de la plabte" value={enterPlant} onChange={(e) => setEnterPlant(e.target.value)}/>
+                            <input type="text" name="" id="plant-name-input" placeholder="Enter plant name" onChange={(s)=> setEnterPlant(s.target.value)}/>
                         </form>
 
                         <div className="ligne-millieu">
