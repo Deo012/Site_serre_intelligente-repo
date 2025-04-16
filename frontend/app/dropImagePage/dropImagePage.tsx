@@ -5,9 +5,9 @@ import "./dropImagePage.css"
 //import loupeImg from "/assets/loupe.png"
 import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
-import axios from "axios";
 import { useData } from "@/context/dataContext";
 import { getPanteInfo } from "../api/getPlanteInfo/route";
+import axios from "axios";
 
 const DropImagePage = () => {
 
@@ -26,7 +26,7 @@ const DropImagePage = () => {
     };
 
     const handleUpload = async () => {
-        if (!files) return;
+        if (!files || !enterPlant) return;
 
         const formData = new FormData();
         formData.append("imageFile", files);
@@ -60,7 +60,7 @@ const DropImagePage = () => {
                     <div className="containeur-global-drop-image">
                         <form className="container-form" action="">
                             <label htmlFor="plant-name-input"><Image src="/assets/loupe.png" alt="" width={30} height={30}/></label>
-                            <input type="text" name="" id="plant-name-input" placeholder="Enter plant name"/>
+                            <input type="text" name="" id="plant-name-input" placeholder="Enter plant name" onChange={(s)=> setEnterPlant(s.target.value)}/>
                         </form>
 
                         <div className="ligne-millieu">
