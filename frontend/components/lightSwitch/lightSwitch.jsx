@@ -95,7 +95,7 @@ export default function CustomLightSwitch() {
         }
         label={
           <Typography sx={{ fontSize: '1.2rem' }}>
-            Light
+            Lumière
           </Typography>
         }
       />

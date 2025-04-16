@@ -7,7 +7,6 @@ import SideBar from "@/components/sideBar/sideBar";
 import Image from "next/image";
 import axios from "axios";
 import { useData } from "@/context/dataContext";
-import { getPanteInfo } from "../api/getPlanteInfo/route";
 
 const DropImagePage = () => {
 
@@ -26,16 +25,18 @@ const DropImagePage = () => {
     };
 
     const handleUpload = async () => {
-        if (!files) return;
-
         const formData = new FormData();
-        formData.append("imageFile", files);
-        formData.append("plantName", enterPlant);
+        if (files) formData.append("imageFile", files);
+        if (enterPlant) formData.append("plantName", enterPlant);
 
-        const data = await getPanteInfo(formData);
-        setResult(data.plant ? data.plant.common_name : "Not found");
+        const res = await fetch("/api/getPlanteInfo", {
+            method: "POST",
+            body: formData,
+        });
 
-        console.log(data.plant)
+        const data = await res.json();
+        console.log("API Response:", data);
+        setResult(data.plant?.common_name || "Not found");
 
         plantdata.humidite_max =  data.plant ? data.plant.max_humidity : 999,
         plantdata.humidite_min = data.plant ? data.plant.min_humidity : 999,
@@ -60,7 +61,7 @@ const DropImagePage = () => {
                     <div className="containeur-global-drop-image">
                         <form className="container-form" action="">
                             <label htmlFor="plant-name-input"><Image src="/assets/loupe.png" alt="" width={30} height={30}/></label>
-                            <input type="text" name="" id="plant-name-input" placeholder="Enter plant name"/>
+                            <input type="text" name="" id="plant-name-input" placeholder="Entrez le nom de la plabte" value={enterPlant} onChange={(e) => setEnterPlant(e.target.value)}/>
                         </form>
 
                         <div className="ligne-millieu">
@@ -70,9 +71,9 @@ const DropImagePage = () => {
                         <div id="glisser-area">
                             <input type="file" accept="image/" onChange={handleDrop}/>
                         </div>
-                        <button  onClick={handleUpload}>Send</button>
+                        <button  onClick={handleUpload}>Envoyer</button>
 
-                        {result && <h2>Plant Identified: {result}</h2>}
+                        {result && <h2>Plant Identifé: {result}</h2>}
 
                     </div>
 
