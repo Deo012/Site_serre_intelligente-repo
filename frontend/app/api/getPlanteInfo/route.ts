@@ -1,3 +1,13 @@
+/**
+ * Traitement des images par image
+ * Rechercher avec Prisma (remote DB) les infos pour la santé
+ * avec un fallback vers MongoDBCompass si Prisma échoue.
+ * 
+ * Fonction:
+ * - POST() : Envoie l'image pour process
+ * - databaseInfo() : Recherche dans la base de donneé
+ */
+
 "use server";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
@@ -7,14 +17,18 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
     const formData = await req.formData();
+
+    // Recupérer les données
     const plantName = formData.get("plantName") as string | null;
     const file = formData.get("imageFile") as File | null;
 
+    // Si nom de plante donné faire la recherche dans la bd directement
     if (plantName && plantName.trim() !== "") {
         const plant_health = await databaseInfo(plantName);
         return NextResponse.json(plant_health);
     }
 
+    // Envoyer image pour deviner nom plante et rechercher dans DB
     if (file) {
         const response = await fetch("http://127.0.0.1:5000/predict", {
             method: "POST",
@@ -33,7 +47,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "No plantName or file provided." }, { status: 400 });
 }
 
+// Fonction fait une recherche des health suggestions dans Atlas (Remote) et Compass (local)
 const databaseInfo = async (plantName: string) => {
+
+    //Remote Atlas
     try {
         const plantData = await prisma.plantesInfos.findFirst({
             where: { common_name: plantName },
