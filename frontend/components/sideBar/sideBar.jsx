@@ -1,14 +1,18 @@
+/**
+ * sideBar.jsx
+ * Ce composant est la navigation en version sideBar
+ */
 import React, { useState } from "react";
 import "./sideBar.css"
 import Link from "next/link"
 import Image from "next/image";
-import { useLocation } from "react-router-dom";
 import { usePathname } from "next/navigation";
 
 
 const SideBar = () => {
     const pathname = usePathname();
 
+    // Fonction supprime expiration du token jwt se qui deconnect
     const handleLogout = async () => {
         const response = await fetch("/api/auth/logout", {
             method: "POST",

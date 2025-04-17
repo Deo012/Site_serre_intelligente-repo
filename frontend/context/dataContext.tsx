@@ -1,23 +1,29 @@
 "use client"
-
+/**
+ * dataContext.tsx
+ * Fournit les données dynamiques à l'application via un DataProvider context.
+ * Gère les capteurs, les modules contrôlables à distance et les infos de plantes.
+ *
+ * Fonctions principales : DataProvider, fetchData, toggleSwitchState, useData
+ */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-//  Define the data structure to contain sensors data
+//  Definie la structure de donné qui représente les capteurs
 interface CapteurData{
     title: string;
     value: string;   
     companyName: string;
 }
 
-// Define data structure for controllable device
+// Definie structure pour les éléments controllable a distance
 interface RemoteDevice{
     title: string;  
     companyName: string;
     switch_state: boolean;
 }
 
-// Data stucture for database info
+// Data stucture pour les données de santés de la bd
 interface PlanteInfo{
     humidite_max: number;
     humidite_min: number;
@@ -34,7 +40,7 @@ const initialData: CapteurData[] = [
     { title: "CO2", value: "-11ppm", companyName: "Kingwin" },
 ];
 
-//  Liste of remote device
+//  Liste des appareils distants
 const deviceList: RemoteDevice[] = [
     { title: "Ventillateur", companyName: "Kingwin", switch_state: false },
     { title: "Humidité", companyName: "Pompe", switch_state: false },
@@ -51,7 +57,7 @@ const planteInfo: PlanteInfo = {
     temp_min: -999,
 }
 
-//  Create Contexte
+//  Object Context qui sert a distribué les données sur toute les pages
 const DataContext = createContext<{
     capteursData: CapteurData[];
     remoteDevices: RemoteDevice[];
@@ -66,15 +72,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     const [remoteDevices, setRemoteDevices] = useState<RemoteDevice[]>(deviceList)
     const [plantdata, setplantdata] = useState<PlanteInfo>(planteInfo)
 
-    //  Requete vers serveur Flask pour recevoir le data
+    //  Requete vers serveur Flask pour recevoir le data des capteurs
     const fetchData = () => {
-        axios.get("http://localhost:5000/temperature")
-        // axios.get("http://10.0.0.238:5000/temperature")
+
+         axios.get("http://localhost:5000/temperature")     // Pour test
+        //axios.get("http://192.168.1.3:5000/temperature")  // Vrai IP du raspberry
             .then((response) => {
                 setcapteursData([
-                    // { title: "Temperature", value: `${response.data.temp}°C`, companyName: "Pompe" },
-                    // { title: "Humidité", value: `${response.data.hum}%`, companyName: "Pompe" },
-
                     { title: "Temperature", value: `${response.data.temperature}°C`, companyName: "Pompe" },
                     { title: "Humidité", value: `${response.data.humidity}%`, companyName: "Pompe" },
                     { title: "CO2", value: `${response.data.co2} ppm`, companyName: "Kingwin" },
@@ -83,7 +87,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
             .catch((error) => console.error("Error fetching data:", error));
     };
 
-    // Fetch data initially and then every 5 seconds
+    // Récupère data d'abord et ensuite toutes les 5 seconds
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 5000); // Fetch every 5 seconds
@@ -91,6 +95,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
 
+    // Inverse switch_state quand appelé
     const toggleSwitchState = (index: number) => {
         setRemoteDevices((prevDevices) => 
             prevDevices.map((device, i) => 
@@ -100,13 +105,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode}> = ({ children 
     };
 
     return(
+        // utiliser comme une balise html encapsuler les pages qui ont accès a ces données
         <DataContext.Provider value={{capteursData, toggleSwitchState, remoteDevices, plantdata}}>
             {children}
         </DataContext.Provider>
     );
 }
 
-// Custom Hook to use DataContext
+// Custom Hook to use DataContext dans les autres pages
 export const useData = () => {
     const context = useContext(DataContext);
     if (!context) {

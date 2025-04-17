@@ -1,3 +1,8 @@
+/**
+ * circularProgress.jsx
+ * Permet le controle de l'intensité de la lampe de chauffage
+ */
+
 import React, { useEffect, useState } from "react";
 import "./circularProgress.css"; // Import the CSS file
 

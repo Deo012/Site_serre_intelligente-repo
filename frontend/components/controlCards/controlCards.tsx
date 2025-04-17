@@ -1,3 +1,9 @@
+/**
+ * controlCards.js 
+ * Composants générant les cartes pour le contrôle 
+ * des appareils controllable ;a distance
+ */
+
 import React, { useEffect, useState } from "react";
 import "./controlCards.css"
 import Card from "../card/card";
@@ -8,6 +14,8 @@ let singleuse = false
 
 const ControlCards = () => {
     const {remoteDevices, toggleSwitchState, plantdata, capteursData} = useData();
+    
+    // Structure contenant les différents état de chaque carte
     interface CardStatus {
         tempStat: "chaud" | "froid" | "neutre",
         humStat: "inonde" | "sec" | "neutre",
@@ -21,6 +29,7 @@ const ControlCards = () => {
         humAirStat: "neutre",
     });
 
+    // fonction relancer a chaque changement des éléements récupéré dans useData
     useEffect(() => {
         if (!capteursData.length || !plantdata) return;
 
@@ -32,7 +41,7 @@ const ControlCards = () => {
         if (temp_actuel > temp_max) {
 
             setStatus(prev => ({ ...prev, tempStat: "chaud" }));
-            axios.post("http://10.0.0.238:5000/fan_on")
+            axios.post("http://192.168.1.3.133:5000/fan_on")
             console.log("Ventillateur allume")
             singleuse = true
             // To-Do: ajouter logique pour éteindre les lumières chauffantes
@@ -40,7 +49,7 @@ const ControlCards = () => {
         } else if (temp_actuel < temp_min) {
 
             setStatus(prev => ({ ...prev, tempStat: "froid" }));
-            axios.post("http://10.0.0.238:5000/fan_off")
+            axios.post("http://192.168.1.3:5000/fan_off")
             console.log("Ventillateur eteint")
             // To-Do: ajouter logique pour allumer les lumières chauffantes
 
@@ -48,7 +57,7 @@ const ControlCards = () => {
             setStatus(prev => ({ ...prev, tempStat: "neutre" }));
             console.log("Ventillateur eteint")
             if ( singleuse == true){
-                axios.post("http://10.0.0.238:5000/fan_off")
+                axios.post("http://192.168.1.3:5000/fan_off")
             }
             singleuse = false
             // axios.post("http://10.0.0.238:5000/fan_off")
@@ -59,7 +68,8 @@ const ControlCards = () => {
         <>
             <div className="control-cards">
                 {remoteDevices.map((device, id) => {
-
+                    
+                    // Vérifie qu'elle carte est généré et applique l'état actuel pour un coloriage approprié
                     let deviceStatus = "neutre";
                     if (device.title.toLowerCase().includes("ventillateur")) {
                         deviceStatus = status.tempStat;

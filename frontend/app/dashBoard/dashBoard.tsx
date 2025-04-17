@@ -1,5 +1,11 @@
 'use client'
 
+/**
+ * dashBoard.tsx
+ * Tableau de board rassemblant le control des composants,
+ * les données des capteurs et la sugestion de santé
+ */
+
 import React, { useEffect } from "react";
 import "./dashBoard.css"
 import SlideBar from "../../components/slideBar/slideBar.jsx";

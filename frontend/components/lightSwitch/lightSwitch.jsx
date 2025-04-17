@@ -1,3 +1,9 @@
+/**
+ * lightSwitch.js
+ * button pour allumer ou éteindre la lumière chauffante.
+ * Le code à été pris ici: https://mui.com/material-ui/react-switch/
+ */
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
@@ -74,9 +80,9 @@ export default function CustomLightSwitch() {
 
     try {
       if (isChecked) {
-        await axios.get("http://10.0.0.238:5000/led_on");
+        await axios.get("http://192.168.1.3:5000/led_on");
       } else {
-        await axios.get("http://10.0.0.238:5000/led_off");
+        await axios.get("http://192.168.1.3:5000/led_off");
       }
       console.log("Switch toggled: ", isChecked);
     } catch (error) {

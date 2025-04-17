@@ -1,3 +1,7 @@
+/**
+ * serreInfo.jsx
+ * Permet de généré les cartes affichant les données des capteurs
+ */
 import { useState } from "react";
 import ResumeCard from "../resumeCard/resumeCard.jsx";
 import { useData } from "@/context/dataContext.tsx";

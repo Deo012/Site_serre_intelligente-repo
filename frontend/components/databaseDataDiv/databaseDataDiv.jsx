@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * databaseDataDiv.jsx
+ * Fonction qui affiche les suggestions pour la santé de la plante
+ */
+
 import React from "react";
 import { useData } from "@/context/dataContext";
 import "./databaseDataDiv.css";

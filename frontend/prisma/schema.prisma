@@ -1,3 +1,5 @@
+// Fichier mapant l'allure de la base de donnée
+
 generator client {
   provider = "prisma-client-js"
 }

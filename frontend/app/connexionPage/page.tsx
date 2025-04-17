@@ -10,17 +10,18 @@ import { useRouter } from "next/navigation";
 const ConnexionPage = () => {
     const router = useRouter()
     
-    // State to handle login success
+    // State to handle login success (fait de cette facon pour éviter une erreur)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Rechercher l'utilisateur et vérifier les infos quand le form html est soummis
     async function handelSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault(); //empeche le bouton de soummettre le formulaire
+        e.preventDefault(); //empeche le bouton de soummettre le formulaire ou de régénéré la page 
         
         const formData = new FormData(e.currentTarget);
         const username = formData.get("username");
         const password = formData.get("password");
 
+        // Envoie les données au nextjs backend (tout les fichier "use server" -- dossié API) 
         const reponse = await fetch("/api/auth/login",{
             method: "POST",
             headers: {"Content-Type": "application/json"},

@@ -1,5 +1,8 @@
-
 "use client"
+
+/**
+ * Page d'acceul
+ */
 
 import "./acceuilPage.css";
 import Tete from "../components/tete/tete";

@@ -1,3 +1,9 @@
+/***
+ * card.jsx
+ * Composant qui permet d'afficher et de modifier
+ * les composants controlable à distance
+ */
+
 import React, { useState } from "react";
 import "./card.css"
 import Toggle from "../toggle/toggle";
@@ -6,7 +12,7 @@ const Card = (props)=>{
 
     const [expanded, setExpanded] = useState(false);
 
-
+    // ToDo: ExpendedCard pour faire des options comme set timers et plus
     return(
         <>
             <div>
@@ -31,7 +37,7 @@ function CompactCard({param}){
             <div className="container-switch">
                 <Toggle
                 checked = {switch_state}
-                onChange = {onToggle} //call the parent function to update switch_state
+                onChange = {onToggle} //call the parent function (toggleSwitchState) to update switch_state
                 cardTitle = {title}
                 />
             </div>

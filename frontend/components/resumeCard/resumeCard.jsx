@@ -1,3 +1,8 @@
+/**
+ * resumeCard.jsx
+ * Composant affiche les données des capteurs (temp, hum, co2)
+ */
+
 const ResumeCard = ( props ) => {
     return(
         <>

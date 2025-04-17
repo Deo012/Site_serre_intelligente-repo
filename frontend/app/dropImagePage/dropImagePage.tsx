@@ -1,5 +1,11 @@
 "use client"
 
+/**
+ * dropImagePage.jsx
+ * Page pour déposer une image et la faire procéder 
+ * par l'intélligence artificielle
+ */
+
 import React, { useEffect, useState } from "react";
 import "./dropImagePage.css"
 import SideBar from "@/components/sideBar/sideBar";
@@ -14,7 +20,7 @@ const DropImagePage = () => {
     const [enterPlant, setEnterPlant] = useState<string>("");
     const {plantdata} = useData()
 
-
+    // Ajoute le fichier dans la variable
     const handleDrop = (s: React.ChangeEvent<HTMLInputElement>) => {
 
         if (s.target.files && s.target.files.length > 0) {
@@ -22,21 +28,25 @@ const DropImagePage = () => {
         }
     };
 
+    // Evnoie le formulaire contenant le nom de la plante et l'image
     const handleUpload = async () => {
 
         const formData = new FormData();
         if (files) formData.append("imageFile", files);
         if (enterPlant) formData.append("plantName", enterPlant);
 
+        // Envoie les données pour les faire traité
         const res = await fetch("/api/getPlanteInfo", {
             method: "POST",
             body: formData,
         });
 
+        // Traitement de la réponse (suggestion de la base de donnée)
         const data = await res.json();
         console.log("API Response:", data);
         setResult(data.plant?.common_name || "Not found");
 
+        // Linker avec le DataContext pour afficher les suggestions
         plantdata.humidite_max =  data.plant ? data.plant.max_humidity : 999,
         plantdata.humidite_min = data.plant ? data.plant.min_humidity : 999,
         plantdata.id = data.plant ? data.plant.id : 999,
